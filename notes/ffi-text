@@ -1,0 +1,10 @@
+text must
+-render text
+-accept newlines
+-accept delete
+        -and delete char behind cursor
+        -and move cursor
+-a cursor position
+-a stem pos
+-be removable from window
+-fixed width that prevents going over limit
