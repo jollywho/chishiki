@@ -26,6 +26,7 @@ module Chishiki
 
     def set_focus(widget)
       @focus = @list[@list.index(widget)]
+      refocus
     end
       
     def refocus
