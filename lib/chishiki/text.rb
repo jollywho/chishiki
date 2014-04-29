@@ -45,7 +45,7 @@ module Chishiki
     end
 
     def draw
-      @list[@index].draw
+      @list.each { |x| x.draw }
     end
   end
 end

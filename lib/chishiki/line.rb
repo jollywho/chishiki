@@ -34,9 +34,7 @@ module Chishiki
     end
 
     def draw
-      if @render
         mvwaddstr stdscr, @pos.y, @pos.x, @msg
-      end
         @render = false
     end
   end

@@ -17,8 +17,9 @@ module Chishiki
     end
 
     def update(ch)
-      if ch == 4
+      if ch == 6
         remove(@focus)
+        clear
       end
       #todo: process movement
       @list.each do |x|
@@ -27,7 +28,7 @@ module Chishiki
     end
 
     def draw
-      @focus.draw
+      @list.each { |x| x.draw }
       refocus
     end
 

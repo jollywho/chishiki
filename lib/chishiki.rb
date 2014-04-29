@@ -24,7 +24,6 @@ module Chishiki
     while ch != KEY_CTRL_Q
       ch = getch
       $log.debug ch
-      clear
       $form.update ch
       $form.draw
     end
