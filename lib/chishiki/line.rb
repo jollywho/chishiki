@@ -16,7 +16,7 @@ module Chishiki
     def new_line
       @index += 1
       tmp = @list[@index-1].pos.dup
-      tmp.y += @index
+      tmp.y += 1
       @list.push Line.new(
         :pos => tmp)
     end
@@ -33,7 +33,7 @@ module Chishiki
     def update(ch)
       $log.debug "update"
       if ch == 127 # delete
-        @list[@index].del
+        del_line unless @list[@index].del
       elsif ch == 10 # newline
         new_line unless @list.size < @index
       else # regular processing
