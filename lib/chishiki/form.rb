@@ -16,11 +16,16 @@ module Chishiki
       @list.pop widget
     end
 
+    def update(ch)
+      #todo: process movement
+      @list.each do |x|
+        x.update ch
+      end
+    end
+
     def draw
       @px = getyx stdscr
-      @list.each do |x|
-        x.draw
-      end
+      @focus.draw
       refocus
     end
 
@@ -30,7 +35,7 @@ module Chishiki
     end
       
     def refocus
-      move @focus.pos.y, @focus.pos.x
+      move @focus.curs.y, @focus.curs.x
     end
   end
 end
