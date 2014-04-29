@@ -27,6 +27,7 @@ module Chishiki
         $form.update ch
         $form.draw
       end
+    clear
       doupdate
       refresh
   rescue => err

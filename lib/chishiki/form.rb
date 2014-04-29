@@ -26,6 +26,9 @@ module Chishiki
     def draw
       @px = getyx stdscr
       @focus.draw
+      @list.each do |x|
+        x.draw
+      end
       refocus
     end
 

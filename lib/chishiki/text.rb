@@ -14,10 +14,10 @@ module Chishiki
       if @curs.x <= @pos.x
         false
       else
-        @msg[@curs.x - @pos.x - 1] = ""
-        $log.debug @msg
+        @msg.slice! @msg.size - 1 
         @curs.x -= 1
         mvwdelch stdscr, @curs.y, @curs.x
+        $log.debug @msg
         true
       end
     end
@@ -27,16 +27,19 @@ module Chishiki
         false
       else
         @render = true
-        @ch = ch.chr
         @msg += ch.chr
-        @curs.x += 1
+        @curs.x = @msg.length + @pos.x
         true
       end
     end
 
+    def focus
+      move @curs.y, @curs.x
+    end
+
     def draw
       if @render
-        mvwaddch stdscr, @curs.y, @curs.x - 1 , @ch.ord
+        mvwaddstr stdscr, @pos.y, @pos.x, @msg
       end
         @render = false
     end

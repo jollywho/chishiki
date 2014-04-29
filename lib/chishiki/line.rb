@@ -22,6 +22,11 @@ module Chishiki
     end
 
     def del_line
+      if @list.size > 1
+        @list.delete_at(@index)
+        @index -= 1
+        @list[@index].del
+      end
       #if empty delete
       #else wrap cursor up line
     end
