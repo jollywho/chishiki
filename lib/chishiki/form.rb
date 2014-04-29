@@ -13,10 +13,13 @@ module Chishiki
     end
 
     def remove(widget)
-      @list.pop widget
+      @list.delete_at(@list.index(widget))
     end
 
     def update(ch)
+      if ch == 4
+        remove(@focus)
+      end
       #todo: process movement
       @list.each do |x|
         x.update ch
@@ -24,11 +27,7 @@ module Chishiki
     end
 
     def draw
-      @px = getyx stdscr
       @focus.draw
-      @list.each do |x|
-        x.draw
-      end
       refocus
     end
 

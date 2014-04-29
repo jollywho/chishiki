@@ -13,26 +13,24 @@ module Chishiki
     start_color
     use_default_colors 
     noecho
-    curs_set 1
+    curs_set 2
     ch = 0
 
     $form = Form.new
-    lbl = Text.new(
+    init_txt = Text.new(
       :pos => Pos.new(5,5))
-    $form.add lbl
-    $form.set_focus lbl
+    $form.add init_txt
+    $form.set_focus init_txt
     while ch != KEY_CTRL_Q
-      ch = wgetch stdscr
+      ch = getch
       $log.debug ch
-        $form.update ch
-        $form.draw
-      end
-    clear
-      doupdate
-      refresh
+      clear
+      $form.update ch
+      $form.draw
+    end
   rescue => err
   ensure
     endwin
     $log.debug err
   end
-  end
+end
