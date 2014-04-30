@@ -8,8 +8,8 @@ module Chishiki
       @pos.y += @pos.h
       @children = []
       @txt = Text.new(@pos.dup)
-      @node = Label.new(@pos.dup.sh(-23, 0), TYPES[type])
-      @pipe = Label.new(@pos.dup.sh(-20, 0), PIPE*20)
+      @node = Label.new(@pos.dup.sh(-NODEWIDTH - PIPEWIDTH, 0), TYPES[type])
+      @pipe = Label.new(@pos.dup.sh(-PIPEWIDTH, 0), PIPE * PIPEWIDTH)
     end
 
     def type

@@ -5,8 +5,8 @@ module Chishiki
       win = getmaxyx stdscr
       @window = Pos.new(0,0,win[1],win[0])
       @center = Pos.new(
-        @window.w/2.0 - 40/2.0,
-        @window.h/2.0 - 1/2.0)
+        @window.w/2.0 - TEXTWIDTH/2.0,
+        @window.h/2.0 - TEXTHEIGHT/2.0)
       @@offset = Pos.new
       @focus = Branch.new(nil, Pos.new)
     end
@@ -32,7 +32,7 @@ module Chishiki
       @@offset.y = @center.y - @focus.pos.y
     end
 
-    def self.offset
+    def self.os
       @@offset
     end
 
