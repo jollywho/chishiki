@@ -7,14 +7,16 @@ module Chishiki
       @center = Pos.new(
         @window.w/2.0 - 40/2.0,
         @window.h/2.0 - 1/2.0)
-      @focus = Branch.new(nil, @center.dup)
+      @@offset = Pos.new
+      @focus = Branch.new(nil, Pos.new)
     end
 
     def update(ch)
       if ch == 6 # ^f
         remove(@focus)
         clear
-      elsif ch == 7 # ^g
+      elsif ch == 14 # ^n
+        @focus = @focus.new_branch false
       else
         @focus.handle_key ch
       end
@@ -23,6 +25,11 @@ module Chishiki
 
     def draw
       @focus.draw
+    end
+
+    def self.shift
+      @@offset.x = @center.x - @focus.pos.x
+      @@offset.y = @center.y - @focus.pos.y
     end
 
     def self.offset

@@ -3,6 +3,6 @@ module Chishiki
     :head => "￭─o",
     :body => "├─o",
     :tail => "└─o",
-    :pipe => "─"
   }
+  PIPE = "─"
 end
