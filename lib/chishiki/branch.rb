@@ -1,9 +1,8 @@
 module Chishiki
   class Branch
-    attr_accessor :pos
+    attr_accessor :pos, :parent, :children
     def initialize(parent, pos)
-      @parent = parent.nil? ? self : parent
-      @type = 
+      @parent = parent
       @pos = pos
       @pos.y += @pos.h
       @children = []
@@ -13,7 +12,7 @@ module Chishiki
     end
 
     def type
-      if @parent == self
+      if @parent == nil
         :head
       elsif @children.size > 0
         :body
@@ -26,7 +25,7 @@ module Chishiki
       if expand
         @parent.new_branch false
       else
-        br = Branch.new(@parent, @pos.dup)
+        br = Branch.new(self, @pos.dup.sh(1,1))
         @children.push br
         br
       end
@@ -36,8 +35,21 @@ module Chishiki
       @txt.handle_key ch
     end
 
+    def seek(seeker, branch)
+      $log.debug "Seek: #{seeker.object_id}"
+      if seeker != branch
+        branch.seek branch, branch.parent
+        if !branch.children.nil?
+          branch.children.each { |x| seek x, branch }
+        end
+      end
+    end
+
     def draw
       #recurively draw parent and child until bounds
+      #seek self, @parent
+      $log.debug "Draw #{self.object_id}"
+      @parent.draw unless @parent.nil?
       @node.draw
       @pipe.draw
       @txt.draw

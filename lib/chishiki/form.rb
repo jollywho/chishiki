@@ -13,10 +13,9 @@ module Chishiki
 
     def update(ch)
       if ch == 6 # ^f
-        remove(@focus)
-        clear
       elsif ch == 14 # ^n
         @focus = @focus.new_branch false
+        shift
       else
         @focus.handle_key ch
       end
@@ -27,7 +26,8 @@ module Chishiki
       @focus.draw
     end
 
-    def self.shift
+    def shift
+      clear
       @@offset.x = @center.x - @focus.pos.x
       @@offset.y = @center.y - @focus.pos.y
     end
