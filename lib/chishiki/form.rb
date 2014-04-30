@@ -8,6 +8,7 @@ module Chishiki
       add Text.new(
         :pos => @window)
       center
+      set_focus(@focus)
     end
 
     def add(widget)
@@ -37,6 +38,7 @@ module Chishiki
 
     def set_focus(widget)
       @focus = @list[@list.index(widget)]
+      move @focus.curs.y, @focus.curs.x
     end
 
     def center

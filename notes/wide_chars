@@ -2,3 +2,6 @@ Tue Apr 29 11:14:47 EDT 2014
 #wide chars are being counted as 2 spaces
 #ghost cursor exists when update | draw runs while key is still held down.
 app doesn't process the keyup.
+Wed Apr 30 10:07:10 EDT 2014
+#ghost cursor stops when tmux session reset on commit:
+        # 7c4e3dfb8bc1a5aeee277a629c05d4a4a5e3b5a0
