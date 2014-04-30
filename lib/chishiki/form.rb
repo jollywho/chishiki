@@ -1,50 +1,33 @@
 module Chishiki
   class Form
-    attr_accessor :list
     def initialize
       @list = []
       win = getmaxyx stdscr
       @window = Pos.new(0,0,win[1],win[0])
-      $log.debug @window
-      add Text.new(
-        :pos => @window.dup)
-      center
-      set_focus(@focus)
-    end
-
-    def add(widget)
-      @list.push widget
-      @focus = widget
-    end
-
-    def remove(widget)
-      @list.delete_at(@list.index(widget))
+      @center = Pos.new(
+        @window.w/2.0 - 40/2.0,
+        @window.h/2.0 - 1/2.0)
+      @focus = Branch.new(nil, @center.dup)
     end
 
     def update(ch)
-      if ch == 6
+      if ch == 6 # ^f
         remove(@focus)
         clear
+      elsif ch == 7 # ^g
+      else
+        @focus.handle_key ch
       end
-      #todo: process movement
-      @list.each do |x|
-        x.update ch
-      end
-      set_focus(@focus)
+      $log.debug @focus.object_id
     end
 
     def draw
-      @list.each { |x| x.draw }
+      @focus.draw
     end
 
-    def set_focus(widget)
-      @focus = @list[@list.index(widget)]
-      move @focus.curs.y, @focus.curs.x
+    def self.offset
+      @@offset
     end
 
-    def center
-      $log.debug @window
-      @focus.move(@window.w/2.0 - @focus.pos.w/2.0, @window.h/2.0 - @focus.pos.h/2.0)
-    end
   end
 end

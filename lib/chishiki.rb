@@ -18,6 +18,7 @@ module Chishiki
     ch = 0
 
     $form = Form.new
+    $form.draw
     while ch != KEY_CTRL_Q
       ch = wgetch stdscr
       $log.debug ch

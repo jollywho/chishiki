@@ -1,1 +1,9 @@
 form holds the widgets and keeps track of what has focus
+
+
+#focus is centered to a fixed location on screen.
+#all other objects need an absolute position to subtract from an offset.
+#start at 0,0 offset and 0,0 initial textbox.
+#when another textbox is added, it takes the old absolute height of the previous branch + lines as its absolute.
+#the new text is then focused to, and the difference between its absolute and centered position is the offset.
+#the offset is then applied to all other objects on the form.

@@ -5,3 +5,5 @@ app doesn't process the keyup.
 Wed Apr 30 10:07:10 EDT 2014
 #ghost cursor stops when tmux session reset on commit:
         # 7c4e3dfb8bc1a5aeee277a629c05d4a4a5e3b5a0
+#suspect ghost cursor is caused by having a split pane in tmux.
+#running the process on the same code in a new window removes the problem.

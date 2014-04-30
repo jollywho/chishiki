@@ -1,17 +1,12 @@
-require './chishiki/widget.rb'
 module Chishiki
   class Label 
-    attr_accessor :msg, :pos, :msg_i
-    def initialize args
-      args.each do |k,v|
-        instance_variable_set("@#{k}", v) unless v.nil?
-      end
-      @msg = ""
-      @msg_i = 96
+    def initialize(pos, msg)
+      @pos = pos
+      @msg = msg
     end
 
     def draw
-      mvwaddch stdscr, @pos.y, @pos.x, @msg_i
+      mvwaddstr stdscr, @pos.y, @pos.x, @msg
     end
   end
 end

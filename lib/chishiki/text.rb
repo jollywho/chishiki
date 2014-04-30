@@ -1,21 +1,24 @@
 module Chishiki
   class Text
     attr_accessor :pos
-    def initialize args
-      args.each do |k,v|
-        instance_variable_set("@#{k}", v) unless v.nil?
-      end
+    def initialize(pos)
+      @pos = pos
       @list = []
       @pos.w = 40
       @pos.h = 1
       @index = -1
+      $log.debug "new Text"
+      $log.debug @pos
       new_line
     end
 
     def new_line
       @index += 1
-      @list.push Line.new(
-        :pos => @pos.dup, :line => @index)
+      @list.push Line.new(@pos.dup, @index)
+    end
+
+    def size
+      @list.size
     end
 
     def del_line
@@ -26,19 +29,19 @@ module Chishiki
       end
     end
 
-    def move(x, y)
+    def shift(pos) # rel
       $log.debug "move text"
-      $log.debug "#{x},#{y}"
-      @pos.x = x
-      @pos.y = y
-      @list.each { |z| z.move(x, y) }
+      $log.debug "#{pos.x},#{pos.y}"
+      @pos.x = pos.x
+      @pos.y = pos.y
+      @list.each { |x| z.move(pos) }
     end
 
     def curs
       @list[@index].curs
     end
 
-    def update(ch)
+    def handle_key(ch)
       $log.debug "text update"
       if ch == 127 # delete
         del_line unless @list[@index].del
@@ -50,8 +53,7 @@ module Chishiki
     end
 
     def draw
-      @list[@index].draw
-      #@list.each { |x| x.draw }
+      @list.each { |x| x.draw }
     end
   end
 end

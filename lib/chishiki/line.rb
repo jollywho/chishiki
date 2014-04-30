@@ -1,13 +1,14 @@
 module Chishiki
   class Line
-    attr_accessor :curs, :pos, :msg, :line
-    def initialize args
-      args.each do |k,v|
-        instance_variable_set("@#{k}", v) unless v.nil?
-    end
+    attr_accessor :curs, :pos, :line
+    def initialize(pos, line)
+      $log.debug "new line"
+      @pos = pos
+      @line = line
       @msg = ""
       @pos.y += @line
       @curs = Pos.new(@pos.x, @pos.y, 1, 1)
+      $log.debug @pos
     end
 
     def del
@@ -35,9 +36,9 @@ module Chishiki
       end
     end
 
-    def move(x, y)
-      @curs.x = x - @pos.x
-      @curs.y = y - @pos.y
+    def shift(pos)
+      @curs.x += pos.x
+      @curs.y += pos.y
       @pos.x = x
       @pos.y = y + @line
     end

@@ -6,6 +6,13 @@ module Chishiki
       @y = y
       @w = w
       @h = h
+      self
+    end
+
+    def sh(x,y)
+      @x += x
+      @y += y
+      self
     end
 
     def to_s
