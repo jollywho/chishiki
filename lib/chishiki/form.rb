@@ -3,6 +3,11 @@ module Chishiki
     attr_accessor :list
     def initialize
       @list = []
+      win = getmaxyx stdscr
+      @window = Pos.new(0,0,win[1],win[0])
+      add Text.new(
+        :pos => @window)
+      center
     end
 
     def add(widget)
@@ -29,16 +34,15 @@ module Chishiki
 
     def draw
       @list.each { |x| x.draw }
-      refocus
+      set_focus
     end
 
-    def set_focus(widget)
-      @focus = @list[@list.index(widget)]
-      refocus
+    def set_focus
+      #@focus = @list[@list.index(widget)]
     end
-      
-    def refocus
-      move @focus.curs.y, @focus.curs.x
+
+    def center
+      @focus.move(80, 20)
     end
   end
 end

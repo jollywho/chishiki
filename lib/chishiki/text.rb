@@ -8,17 +8,14 @@ module Chishiki
       @list = []
       @pos.w = 40
       @pos.h = 1
-      @list.push Line.new(
-        :pos => pos)
-      @index = 0
+      @index = -1
+      new_line
     end
 
     def new_line
       @index += 1
-      tmp = @list[@index-1].pos.dup
-      tmp.y += 1
       @list.push Line.new(
-        :pos => tmp)
+        :pos => @pos.dup, :line => @index)
     end
 
     def del_line
@@ -29,12 +26,19 @@ module Chishiki
       end
     end
 
+    def move(x, y)
+      $log.debug "move text"
+      @pos.x = x
+      @pos.y = y
+      @list.each { |z| z.move(x, y) }
+    end
+
     def curs
       @list[@index].curs
     end
 
     def update(ch)
-      $log.debug "update"
+      $log.debug "text update"
       if ch == 127 # delete
         del_line unless @list[@index].del
       elsif ch == 10 # newline
@@ -45,7 +49,8 @@ module Chishiki
     end
 
     def draw
-      @list.each { |x| x.draw }
+      @list[@index].draw
+      #@list.each { |x| x.draw }
     end
   end
 end

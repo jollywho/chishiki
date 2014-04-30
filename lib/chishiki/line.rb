@@ -1,13 +1,13 @@
 module Chishiki
   class Line
-    attr_accessor :curs, :pos, :msg
+    attr_accessor :curs, :pos, :msg, :line
     def initialize args
       args.each do |k,v|
         instance_variable_set("@#{k}", v) unless v.nil?
     end
       @msg = ""
-      @ch = ""
-      @curs = @pos.dup
+      @pos.y += @line
+      @curs = Pos.new(@pos.x, @pos.y, 1, 1)
     end
 
     def del
@@ -17,25 +17,33 @@ module Chishiki
         @msg.slice! @msg.size - 1 
         @curs.x -= 1
         mvwdelch stdscr, @curs.y, @curs.x
+        $log.debug @curs
         $log.debug @msg
         true
       end
     end
 
     def add_ch(ch)
-      if @curs.x + 1 >= @pos.w
+      if @curs.x + 1 >= @pos.x + @pos.w
         false
       else
-        @render = true
+        $log.debug "line add ch"
         @msg += ch.chr
-        @curs.x = @msg.length + @pos.x
+        @curs.x = @pos.x + @msg.size
         true
       end
     end
 
+    def move(x, y)
+      @curs.x = x - @pos.x
+      @curs.y = y - @pos.y
+      @pos.x = x
+      @pos.y = y + @line
+    end
+
     def draw
+      $log.debug "line draw"
         mvwaddstr stdscr, @pos.y, @pos.x, @msg
-        @render = false
     end
   end
 end

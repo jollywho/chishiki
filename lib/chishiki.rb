@@ -17,10 +17,6 @@ module Chishiki
     ch = 0
 
     $form = Form.new
-    init_txt = Text.new(
-      :pos => Pos.new(5,5))
-    $form.add init_txt
-    $form.set_focus init_txt
     while ch != KEY_CTRL_Q
       ch = getch
       $log.debug ch
