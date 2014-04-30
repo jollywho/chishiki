@@ -41,6 +41,10 @@ module Chishiki
       @pos.y = y + @line
     end
 
+    def remove
+      mvwdelch stdscr, @curs.y, @curs.x
+    end
+
     def draw
       $log.debug "line draw"
         mvwaddstr stdscr, @pos.y, @pos.x, @msg

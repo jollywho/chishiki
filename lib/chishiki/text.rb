@@ -23,6 +23,7 @@ module Chishiki
         @list.delete_at(@index)
         @index -= 1
         @list[@index].del
+        curs
       end
     end
 

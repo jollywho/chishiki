@@ -18,10 +18,12 @@ module Chishiki
 
     $form = Form.new
     while ch != KEY_CTRL_Q
-      ch = getch
+      ch = wgetch stdscr
       $log.debug ch
       $form.update ch
       $form.draw
+      doupdate
+      wrefresh stdscr
     end
   rescue => err
   ensure

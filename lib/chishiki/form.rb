@@ -11,10 +11,8 @@ module Chishiki
     end
 
     def add(widget)
-      if @focus.nil?
-        @focus = widget
-      end
       @list.push widget
+      @focus = widget
     end
 
     def remove(widget)
@@ -30,15 +28,15 @@ module Chishiki
       @list.each do |x|
         x.update ch
       end
+      set_focus(@focus)
     end
 
     def draw
       @list.each { |x| x.draw }
-      set_focus
     end
 
-    def set_focus
-      #@focus = @list[@list.index(widget)]
+    def set_focus(widget)
+      @focus = @list[@list.index(widget)]
     end
 
     def center
