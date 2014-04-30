@@ -23,12 +23,12 @@ module Chishiki
         @list.delete_at(@index)
         @index -= 1
         @list[@index].del
-        curs
       end
     end
 
     def move(x, y)
       $log.debug "move text"
+      $log.debug "#{x},#{y}"
       @pos.x = x
       @pos.y = y
       @list.each { |z| z.move(x, y) }

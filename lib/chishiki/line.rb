@@ -24,6 +24,7 @@ module Chishiki
     end
 
     def add_ch(ch)
+      $log.debug @pos
       if @curs.x + 1 >= @pos.x + @pos.w
         false
       else
@@ -39,10 +40,6 @@ module Chishiki
       @curs.y = y - @pos.y
       @pos.x = x
       @pos.y = y + @line
-    end
-
-    def remove
-      mvwdelch stdscr, @curs.y, @curs.x
     end
 
     def draw

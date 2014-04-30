@@ -5,8 +5,9 @@ module Chishiki
       @list = []
       win = getmaxyx stdscr
       @window = Pos.new(0,0,win[1],win[0])
+      $log.debug @window
       add Text.new(
-        :pos => @window)
+        :pos => @window.dup)
       center
       set_focus(@focus)
     end
@@ -42,7 +43,8 @@ module Chishiki
     end
 
     def center
-      @focus.move(80, 20)
+      $log.debug @window
+      @focus.move(@window.w/2.0 - @focus.pos.w/2.0, @window.h/2.0 - @focus.pos.h/2.0)
     end
   end
 end

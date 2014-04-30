@@ -7,6 +7,7 @@ include FFI::NCurses
 module Chishiki
   Dir["./chishiki/*.rb"].each {|file| require file}
   $log = Logger.new("log")
+  $log.debug "***************"
   begin
     initscr
     raw
