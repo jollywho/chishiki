@@ -17,7 +17,7 @@ module Chishiki
       else
         @msg.slice! @msg.size - 1 
         @curs.x -= 1
-        mvwdelch stdscr, @curs.y, @curs.x
+        mvwdelch stdscr, @curs.y + Form.os.y, @curs.x + Form.os.x
         $log.debug @curs
         $log.debug @msg
         true
