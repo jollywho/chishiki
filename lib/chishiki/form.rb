@@ -29,6 +29,8 @@ module Chishiki
         @focus = @focus.left
       elsif ch == 36 # $
         @focus = @focus.right
+      elsif ch == 2 # ^b
+        @focus = @focus.new_branch true
       elsif ch == 14 # ^n
         @focus = @focus.new_branch false
         shift

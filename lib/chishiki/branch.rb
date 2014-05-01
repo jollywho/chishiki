@@ -2,6 +2,7 @@ module Chishiki
   class Branch
     attr_accessor :pos, :parent, :children
     def initialize(parent, pos)
+      $log.debug "new branch"
       @parent = parent
       @pos = pos
       @pos.y += @pos.h
@@ -75,13 +76,17 @@ module Chishiki
       move @txt.curs.y + Form.os.y, @txt.curs.x + Form.os.x
     end
 
-    def seek(seeker, branch, &c)
+    def seek(seeker, branch, climb, &c)
       yield self
       if branch != nil
+        
+      $log.debug "seeker: #{seeker.pos}, branch: #{branch.pos}"
         if seeker != branch
-          branch.seek branch, branch.parent, &c
+          if climb
+          branch.seek branch, branch.parent, true, &c
+          end
           if !branch.children.nil?
-            branch.children.each { |x| branch.seek seeker, x, &c }
+            branch.children.each { |x| branch.seek seeker, x, false, &c }
           end
         end
       end
@@ -94,7 +99,8 @@ module Chishiki
     end
 
     def draw
-      seek(self, @parent) { |x| x.render }
+      $log.debug "draw"
+      seek(self, @parent, true) { |x| x.render }
     end
 
   end
