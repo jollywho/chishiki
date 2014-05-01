@@ -37,19 +37,20 @@ module Chishiki
 
     def seek(seeker, branch)
       $log.debug "Seek: #{seeker.object_id}"
-      if seeker != branch
-        branch.seek branch, branch.parent
-        if !branch.children.nil?
-          branch.children.each { |x| seek x, branch }
+      @txt.draw
+      if branch != nil
+        if seeker != branch
+          branch.seek branch, branch.parent
+          if !branch.children.nil?
+            branch.children.each { |x| branch.seek seeker, x }
+          end
         end
       end
-    end
+    end 
 
     def draw
-      #recurively draw parent and child until bounds
-      #seek self, @parent
       $log.debug "Draw #{self.object_id}"
-      @parent.draw unless @parent.nil?
+      seek self, @parent
       @node.draw
       @pipe.draw
       @txt.draw
