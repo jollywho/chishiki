@@ -83,10 +83,11 @@ module Chishiki
       $log.debug "seeker: #{seeker.pos}, branch: #{branch.pos}"
         if seeker != branch
           if climb
-          branch.seek branch, branch.parent, true, &c
+            branch.seek branch, branch.parent, true, &c
           end
           if !branch.children.nil?
-            branch.children.each { |x| branch.seek seeker, x, false, &c }
+            $log.debug "child"
+            branch.children.each { |x| x.seek branch, x, false, &c }
           end
         end
       end

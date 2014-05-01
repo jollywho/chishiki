@@ -22,18 +22,17 @@ module Chishiki
       if ch == 6 # ^f
       elsif ch == 33 # !
         ch_mode
-        @focus = @focus.up
+        ch_focus @focus.up
       elsif ch == 64 # @
-        @focus = @focus.down
+        ch_focus @focus.down
       elsif ch == 35 # #
-        @focus = @focus.left
+        ch_focus @focus.left
       elsif ch == 36 # $
-        @focus = @focus.right
+        ch_focus @focus.right
       elsif ch == 2 # ^b
-        @focus = @focus.new_branch true
+        ch_focus @focus.new_branch true
       elsif ch == 14 # ^n
-        @focus = @focus.new_branch false
-        shift
+        ch_focus @focus.new_branch false
       else
         @focus.handle_key ch
       end
@@ -43,6 +42,11 @@ module Chishiki
     def draw
       @focus.draw
       @focus.focus
+    end
+
+    def ch_focus(branch)
+      @focus = branch
+      shift
     end
 
     def shift
