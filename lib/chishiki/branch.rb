@@ -35,28 +35,28 @@ module Chishiki
       @txt.handle_key ch
     end
 
-    def seek(seeker, branch)
+    def seek(seeker, branch, &c)
       $log.debug "Seek: #{seeker.object_id}"
-      @txt.draw
+      yield self
       if branch != nil
         if seeker != branch
-          branch.seek branch, branch.parent
+          branch.seek branch, branch.parent, &c
           if !branch.children.nil?
-            branch.children.each { |x| branch.seek seeker, x }
+            branch.children.each { |x| branch.seek seeker, x, &c }
           end
         end
       end
     end 
 
-    def test
-    end 
-    
-    def draw
-      $log.debug "Draw #{self.object_id}"
-      seek self, @parent
+    def render
       @node.draw
       @pipe.draw
       @txt.draw
+    end
+
+    def draw
+      $log.debug "Draw #{self.object_id}"
+      seek(self, @parent) { |x| x.render }
     end
 
   end
