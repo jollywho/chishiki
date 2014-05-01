@@ -15,6 +15,7 @@ module Chishiki
     def new_line
       @index += 1
       @list.push Line.new(@pos.dup, @index)
+      #todo: height has changed, tell form to reshift
     end
 
     def size

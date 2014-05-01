@@ -44,8 +44,7 @@ module Chishiki
     end
 
     def draw
-      $log.debug "line draw"
-        mvwaddstr stdscr, @pos.y, @pos.x, @msg
+        mvwaddstr stdscr, @pos.y + Form.os.y, @pos.x + Form.os.x, @msg
     end
   end
 end

@@ -21,14 +21,50 @@ module Chishiki
       end
     end
 
+    def index
+      @parent.nil? ? 0 : @parent.children.index(self)
+    end
+
     def new_branch(expand)
       if expand
         @parent.new_branch false
       else
-        br = Branch.new(self, @pos.dup.sh(1,1))
+        br = Branch.new(self, @pos.dup.sh(2,1))
         @children.push br
         br
       end
+    end
+
+    def next_child(dir)
+      if @parent.nil?
+        self
+      elsif @parent.children.at(index + dir).nil?
+        self
+      else
+        @parent.children[index + dir]
+      end
+    end
+
+    def up
+      index == 0 ? left : next_child(-1)
+    end
+
+    def down
+      if @children.size < 1
+        self
+      elsif index + 1 >= @children.size
+        @children[0]
+      else
+        next_child(1)
+      end
+    end
+
+    def left
+      @parent.nil? ? self : @parent
+    end
+
+    def right
+      down
     end
 
     def handle_key(ch)
@@ -36,11 +72,10 @@ module Chishiki
     end
 
     def focus
-      move @txt.curs.y, @txt.curs.x
+      move @txt.curs.y + Form.os.y, @txt.curs.x + Form.os.x
     end
 
     def seek(seeker, branch, &c)
-      $log.debug "Seek: #{seeker.object_id}"
       yield self
       if branch != nil
         if seeker != branch
@@ -59,7 +94,6 @@ module Chishiki
     end
 
     def draw
-      $log.debug "Draw #{self.object_id}"
       seek(self, @parent) { |x| x.render }
     end
 
