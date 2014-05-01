@@ -35,6 +35,10 @@ module Chishiki
       @txt.handle_key ch
     end
 
+    def focus
+      move @txt.curs.y, @txt.curs.x
+    end
+
     def seek(seeker, branch, &c)
       $log.debug "Seek: #{seeker.object_id}"
       yield self

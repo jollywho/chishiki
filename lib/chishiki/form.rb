@@ -24,6 +24,7 @@ module Chishiki
 
     def draw
       @focus.draw
+      @focus.focus
     end
 
     def shift
