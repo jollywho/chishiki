@@ -48,6 +48,9 @@ module Chishiki
       end
     end 
 
+    def test
+    end 
+    
     def draw
       $log.debug "Draw #{self.object_id}"
       seek self, @parent
