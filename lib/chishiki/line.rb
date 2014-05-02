@@ -8,12 +8,13 @@ module Chishiki
       @msg = ""
       @pos.y += @line
       @curs = Pos.new(@pos.x, @pos.y, 1, 1)
-      Form.bump_nlo @pos.y
+      Form.bump_nlo @pos.y, 1
       $log.debug @pos
     end
 
     def del
       if @curs.x <= @pos.x
+        Form.bump_nlo @pos.y, -1
         false
       else
         @msg.slice! @msg.size - 1 

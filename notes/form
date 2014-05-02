@@ -26,3 +26,6 @@ when cascading, a branch needs to know what index it is, and the accumulative he
 #parent.children.each do |x|
 #       x.shift height
 #       height += x.pos.h
+
+
+line delete must remove height from branch and nlo

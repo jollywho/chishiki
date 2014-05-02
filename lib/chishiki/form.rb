@@ -8,6 +8,7 @@ module Chishiki
         @window.w/2.0 - TEXTWIDTH/2.0,
         @window.h/2.0 - TEXTHEIGHT/2.0)
       @@offset = Pos.new
+      @@nlo_dir = 0
       @@nlo = 0
       @@focus = Branch.new(nil, Pos.new)
       Form.shift
@@ -56,18 +57,18 @@ module Chishiki
       @@offset.y = $center.y - @@focus.pos.y + @@focus.pos.h/2
     end
 
-    def self.bump_nlo(y)
-      @@nlo_on = true
+    def self.bump_nlo(y, dir)
+      @@nlo_dir = dir
       @@nlo = y
     end
 
-    def self.is_nlo
-      @@nlo_on
-    end
-
     def self.reset_nlo
-      @@nlo_on = false
+      @@nlo_dir = 0
       @@nlo = 0
+    end
+    
+    def self.nlo_dir
+      @@nlo_dir
     end
 
     def self.nlo

@@ -94,17 +94,19 @@ module Chishiki
     end 
 
     def render
-      if Form.is_nlo
+      if @first
+        @first = true
+      else
+        dir = Form.nlo_dir
         if @height > Form.nlo
-          @pos.y += 1
+          @pos.y += dir
         else
-          @height += 1
+          @height += dir
         end
-      end
-        @first = true  # render being called multiple times per loop. that's why unregular
         @node.draw
         @pipe.draw
         @txt.draw
+    end
     end
 
     def draw
