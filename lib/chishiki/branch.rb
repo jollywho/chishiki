@@ -10,6 +10,7 @@ module Chishiki
       @txt = Text.new(@pos.dup)
       @node = Label.new(@pos.dup.sh(-NODEWIDTH - PIPEWIDTH, 0), TYPES[type])
       @pipe = Label.new(@pos.dup.sh(-PIPEWIDTH, 0), PIPE * PIPEWIDTH)
+      @height = 0
     end
 
     def type
@@ -30,7 +31,7 @@ module Chishiki
       if expand
         @parent.new_branch false
       else
-        br = Branch.new(self, @pos.dup.sh(2,1))
+        br = Branch.new(self, @pos.dup.sh(2,@height))
         @children.push br
         br
       end
@@ -79,13 +80,12 @@ module Chishiki
     def seek(seeker, branch, climb, &c)
       yield self
       if branch != nil
-        
-      $log.debug "seeker: #{seeker.pos}, branch: #{branch.pos}"
+
         if seeker != branch
           if climb
             branch.seek branch, branch.parent, true, &c
-          end
-          if !branch.children.nil?
+          else
+           !branch.children.nil?
             $log.debug "child"
             branch.children.each { |x| x.seek branch, x, false, &c }
           end
@@ -94,9 +94,17 @@ module Chishiki
     end 
 
     def render
-      @node.draw
-      @pipe.draw
-      @txt.draw
+      if Form.is_nlo
+        if @height > Form.nlo
+          @pos.y += 1
+        else
+          @height += 1
+        end
+      end
+        @first = true  # render being called multiple times per loop. that's why unregular
+        @node.draw
+        @pipe.draw
+        @txt.draw
     end
 
     def draw

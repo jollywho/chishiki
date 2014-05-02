@@ -8,6 +8,7 @@ module Chishiki
       @msg = ""
       @pos.y += @line
       @curs = Pos.new(@pos.x, @pos.y, 1, 1)
+      Form.bump_nlo @pos.y
       $log.debug @pos
     end
 
@@ -44,7 +45,8 @@ module Chishiki
     end
 
     def draw
-        mvwaddstr stdscr, @pos.y + Form.os.y, @pos.x + Form.os.x, @msg
+      $log.debug "line draw--"
+      mvwaddstr stdscr, @pos.y + Form.os.y, @pos.x + Form.os.x, @msg
     end
   end
 end

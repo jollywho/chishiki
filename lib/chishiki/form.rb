@@ -4,12 +4,13 @@ module Chishiki
       @list = []
       win = getmaxyx stdscr
       @window = Pos.new(0,0,win[1],win[0])
-      @center = Pos.new(
+      $center = Pos.new(
         @window.w/2.0 - TEXTWIDTH/2.0,
         @window.h/2.0 - TEXTHEIGHT/2.0)
       @@offset = Pos.new
-      @focus = Branch.new(nil, Pos.new)
-      shift
+      @@nlo = 0
+      @@focus = Branch.new(nil, Pos.new)
+      Form.shift
       ch_mode
     end
 
@@ -19,40 +20,58 @@ module Chishiki
     end
 
     def update(ch)
+      Form.reset_nlo
       if ch == 6 # ^f
       elsif ch == 33 # !
         ch_mode
-        ch_focus @focus.up
+        ch_focus @@focus.up
       elsif ch == 64 # @
-        ch_focus @focus.down
+        ch_focus @@focus.down
       elsif ch == 35 # #
-        ch_focus @focus.left
+        ch_focus @@focus.left
       elsif ch == 36 # $
-        ch_focus @focus.right
+        ch_focus @@focus.right
       elsif ch == 2 # ^b
-        ch_focus @focus.new_branch true
+        ch_focus @@focus.new_branch true
       elsif ch == 14 # ^n
-        ch_focus @focus.new_branch false
+        ch_focus @@focus.new_branch false
       else
-        @focus.handle_key ch
+        @@focus.handle_key ch
       end
-      $log.debug @focus.object_id
     end
 
     def draw
-      @focus.draw
-      @focus.focus
+      @@focus.draw
+      @@focus.focus
     end
 
     def ch_focus(branch)
-      @focus = branch
-      shift
+      @@focus = branch
+      Form.shift
     end
 
-    def shift
+    def self.shift
       clear
-      @@offset.x = @center.x - @focus.pos.x
-      @@offset.y = @center.y - @focus.pos.y
+      @@offset.x = $center.x - @@focus.pos.x + @@focus.pos.w/2
+      @@offset.y = $center.y - @@focus.pos.y + @@focus.pos.h/2
+    end
+
+    def self.bump_nlo(y)
+      @@nlo_on = true
+      @@nlo = y
+    end
+
+    def self.is_nlo
+      @@nlo_on
+    end
+
+    def self.reset_nlo
+      @@nlo_on = false
+      @@nlo = 0
+    end
+
+    def self.nlo
+      @@nlo
     end
 
     def self.os

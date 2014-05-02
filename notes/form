@@ -7,3 +7,22 @@ form holds the widgets and keeps track of what has focus
 #when another textbox is added, it takes the old absolute height of the previous branch + lines as its absolute.
 #the new text is then focused to, and the difference between its absolute and centered position is the offset.
 #the offset is then applied to all other objects on the form.
+
+form needs to refresh on line add
+
+how to cascade all widgets to re-evaluate their caller's POS.
+
+
+Branch:
+-body
+-tail
+
+when a new branch is created, the user is saying whether it should be a body or tail.
+
+why not run cascade inside draw seek? just set a global bool when shift is needed.
+
+when cascading, a branch needs to know what index it is, and the accumulative height of each sibling.
+#seek self, @parent, true
+#parent.children.each do |x|
+#       x.shift height
+#       height += x.pos.h
