@@ -1,6 +1,14 @@
 module Chishiki
+  class NilBranch
+    def children
+      []
+    end
+    def parent
+    end
+  end
+
   class Branch
-    attr_accessor :pos, :parent, :children
+    attr_accessor :pos, :children, :parent
     def initialize(parent, pos)
       $log.debug "new branch"
       @parent = parent
@@ -13,10 +21,14 @@ module Chishiki
       @height = 0
     end
 
+    def parent_t
+      @parent.nil? ? NilBranch.new : @parent
+    end
+
     def type
       if @parent == nil
         :head
-      elsif @children.size > 0
+      elsif @parent.children.size > 0
         :body
       else
         :tail
@@ -38,13 +50,8 @@ module Chishiki
     end
 
     def next_child(dir)
-      if @parent.nil?
-        self
-      elsif @parent.children.at(index + dir).nil?
-        self
-      else
-        @parent.children[index + dir]
-      end
+      $log.debug "--3"
+      parent_t.children[index + dir]
     end
 
     def up
@@ -52,12 +59,16 @@ module Chishiki
     end
 
     def down
-      if @children.size < 1
-        self
-      elsif index + 1 >= @children.size
-        @children[0]
+      c = next_child(1)
+      if c == nil 
+        $log.debug "--4"
+        if @children.size < 1
+          self
+        else
+          @children[0]
+        end
       else
-        next_child(1)
+        c
       end
     end
 
