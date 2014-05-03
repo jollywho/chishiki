@@ -88,26 +88,20 @@ module Chishiki
       move @txt.curs.y + Form.os.y, @txt.curs.x + Form.os.x
     end
 
-    def seek(seeker, branch, climb, &c)
+    def seek(branch, climb, &c)
       yield self
-      if branch != nil
-
-        if seeker != branch
-          if climb
-            branch.seek branch, branch.parent, true, &c
-          else
-           !branch.children.nil?
-            $log.debug "child"
-            branch.children.each { |x| x.seek branch, x, false, &c }
-          end
+      if self != branch.parent
+        if @parent != nil and climb
+          $log.debug "climb"
+          branch.seek parent_t, true, &c
         end
-      end
-    end 
+          $log.debug "child"
+          @children.each { |x| branch.seek x, false, &c }
+      end 
+    end
 
     def render
-      if @first
-        @first = true
-      else
+        @double = true
         dir = Form.nlo_dir
         if @height > Form.nlo
           @pos.y += dir
@@ -118,11 +112,10 @@ module Chishiki
         @pipe.draw
         @txt.draw
     end
-    end
 
     def draw
       $log.debug "draw"
-      seek(self, @parent, true) { |x| x.render }
+      seek(parent_t, true) { |x| x.render }
     end
 
   end

@@ -1,0 +1,16 @@
+#start at top and render down?
+
+1) if top.inbounds == 0, remove top from list.
+2) if top is in bounds, and top.parent.inbounds > 0, move one parent back and goto 1.
+
+1) for each child seek until out of bounds.
+2) if in bounds, add +1 to parent.inbounds, then repeat 1 for children.
+
+**inital branch cannot have peers**
+__________________________________________________________
+
+from initial branch, render until inbound count reaches 0
+
+when following child branches, add to parent.inbound for each hop.
+
+# calc bounds after reaching a 0 count node?
