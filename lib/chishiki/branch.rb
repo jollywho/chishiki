@@ -8,10 +8,15 @@ module Chishiki
   end
 
   class Branch
-    attr_accessor :pos, :children, :parent
+    attr_accessor :pos, :children, :parent, :cib
+    @@seek
     def initialize(parent, pos)
       $log.debug "new branch"
       @parent = parent
+      if @parent.nil?
+        @@seek = self
+      end
+      @cib = 0
       @pos = pos
       @pos.y += @pos.h
       @children = []
@@ -88,34 +93,30 @@ module Chishiki
       move @txt.curs.y + Form.os.y, @txt.curs.x + Form.os.x
     end
 
-    def seek(branch, climb, &c)
+    def seek(&c)
       yield self
-      if self != branch.parent
-        if @parent != nil and climb
-          $log.debug "climb"
-          branch.seek parent_t, true, &c
-        end
-          $log.debug "child"
-          @children.each { |x| branch.seek x, false, &c }
-      end 
+      @parent.cib += 1 unless @parent.nil?
+      @children.each do |x|
+        x.seek &c
+      end
     end
 
     def render
-        @double = true
-        dir = Form.nlo_dir
-        if @height > Form.nlo
-          @pos.y += dir
-        else
-          @height += dir
-        end
-        @node.draw
-        @pipe.draw
-        @txt.draw
+      dir = Form.nlo_dir
+      if @height > Form.nlo
+        @pos.y += dir
+      else
+        @height += dir
+      end
+      @node.draw
+      @pipe.draw
+      @txt.draw
     end
 
     def draw
       $log.debug "draw"
-      seek(parent_t, true) { |x| x.render }
+      @@seek.seek { |x| x.render }
+      #seek() { |x| x.render }
     end
 
   end

@@ -14,3 +14,9 @@ from initial branch, render until inbound count reaches 0
 when following child branches, add to parent.inbound for each hop.
 
 # calc bounds after reaching a 0 count node?
+
+seek
+
+focus
+
+

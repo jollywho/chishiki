@@ -23,14 +23,14 @@ module Chishiki
     def update(ch)
       Form.reset_nlo
       if ch == 6 # ^f
-      elsif ch == 33 # !
+      elsif ch == 49 # !
         ch_mode
         ch_focus @@focus.up
-      elsif ch == 64 # @
+      elsif ch == 50 # 1
         ch_focus @@focus.down
-      elsif ch == 35 # #
+      elsif ch == 51 # 2
         ch_focus @@focus.left
-      elsif ch == 36 # $
+      elsif ch == 52 # 3
         ch_focus @@focus.right
       elsif ch == 2 # ^b
         ch_focus @@focus.new_branch true
