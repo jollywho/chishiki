@@ -44,11 +44,11 @@ module Chishiki
       @parent.nil? ? 0 : @parent.children.index(self)
     end
 
-    def new_branch(expand)
+    def new_branch(expand, x=2, y=1)
       if expand
-        @parent.new_branch false
+        @parent.new_branch false, 4, 2
       else
-        br = Branch.new(self, @pos.dup.sh(2,@height))
+        br = Branch.new(self, @pos.dup.sh(x,@height+y))
         @children.push br
         br
       end

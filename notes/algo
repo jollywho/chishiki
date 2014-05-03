@@ -15,8 +15,6 @@ when following child branches, add to parent.inbound for each hop.
 
 # calc bounds after reaching a 0 count node?
 
-seek
-
-focus
-
-
+creating a new peer should be inserting below parent, not below focus.
+the insert should cause a line addition.
+why doesn't line addition cause the lines below to bump?
