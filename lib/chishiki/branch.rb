@@ -61,17 +61,20 @@ module Chishiki
       parent_t.children[index + dir]
     end
 
-    def last
-      @children.last.nil? ? self : @children.last
+    def last?(branch)
+      @parent.children.last == branch
     end
 
     def up
       @parent.nil? ? self :
         parent.children.index(self) == 0 ? left :
-        parent.children[parent.children.index(self) - 1]
+          parent.children[parent.children.index(self) - 1]
     end
 
     def down
+      !leaf? ? right :
+        @parent.nil? ? self :
+        parent.children[parent.children.index(self) + 1]
     end
 
     def left
@@ -79,7 +82,7 @@ module Chishiki
     end
 
     def right
-      down
+      leaf? ? self : @children[0]
     end
 
     def handle_key(ch)
