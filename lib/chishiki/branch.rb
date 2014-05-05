@@ -34,13 +34,17 @@ module Chishiki
       @children[index]
     end
 
-    def add_child
+    def add_branch
       @cib += 1
-      px = @pos.sh(2, @cib * 1)
+      px = @pos.sh(@cib > 2 ? 0 : 2, 2)
       br = Branch.new(self, px.dup)
       $log.debug "Added #{br.inspect}"
-      @children.insert 0, br
+      @children.push br
       br
+    end
+
+    def add_leaf
+      parent.add_branch
     end
 
     def up
@@ -50,16 +54,21 @@ module Chishiki
     end
 
     def down
+      $log.debug "DOWN"
       d = parent.children.index(self)
+      $log.debug d
       d = parent[parent.children.index(self) + 1] unless d.nil?
+      $log.debug d
       !d.nil? ? d : !leaf ? right :  self
     end
 
     def left
+      $log.debug "LEFT"
       @parent.nil? ? self : parent
     end
 
     def right
+      $log.debug "RIGHT"
       leaf ? self : @children[0]
     end
 
