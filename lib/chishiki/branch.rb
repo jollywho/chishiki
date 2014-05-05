@@ -1,6 +1,10 @@
 module Chishiki
-  class NilBranch
+  class Branch
+  end
+  class NilBranch < Branch
     attr_accessor :parent
+    def initialize
+    end
     def children
       []
     end
@@ -35,12 +39,12 @@ module Chishiki
       @parent.nil? ? NilBranch.new : @parent
     end
 
-    def leaf?
+    def leaf
       @children.empty?
     end
 
     def type
-      leaf? ? :tail : :body
+      leaf ? :tail : :body
     end
 
     def [](index)
@@ -56,25 +60,16 @@ module Chishiki
       br
     end
 
-    def next_child(dir)
-      $log.debug "--3"
-      parent_t.children[index + dir]
-    end
-
-    def last?(branch)
-      @parent.children.last == branch
-    end
-
     def up
       @parent.nil? ? self :
         parent.children.index(self) == 0 ? left :
-          parent.children[parent.children.index(self) - 1]
+          parent[parent.children.index(self) - 1]
     end
 
     def down
-      !leaf? ? right :
-        @parent.nil? ? self :
-        parent.children[parent.children.index(self) + 1]
+      d = parent.children.index(self)
+      d = parent[parent.children.index(self) + 1] unless d.nil?
+      !d.nil? ? d : !leaf ? right :  self
     end
 
     def left
@@ -82,7 +77,7 @@ module Chishiki
     end
 
     def right
-      leaf? ? self : @children[0]
+      leaf ? self : @children[0]
     end
 
     def handle_key(ch)
@@ -121,4 +116,5 @@ module Chishiki
       "#{name} : #{@pos}"
     end
   end
+
 end
