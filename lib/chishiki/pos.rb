@@ -18,5 +18,9 @@ module Chishiki
     def to_s
       "[#{x}, #{y}]"
     end
+
+    def inspect
+      "[#{x}, #{y}]"
+    end
   end
 end

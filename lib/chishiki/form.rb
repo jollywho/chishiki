@@ -33,9 +33,9 @@ module Chishiki
       elsif ch == 52 # 3
         ch_focus @@focus.right
       elsif ch == 2 # ^b
-        ch_focus @@focus.new_branch true
+        ch_focus @@focus.add_child
       elsif ch == 14 # ^n
-        ch_focus @@focus.new_branch false
+        ch_focus @@focus.add_child
       else
         @@focus.handle_key ch
       end
@@ -47,8 +47,8 @@ module Chishiki
     end
 
     def ch_focus(branch)
-      @@focus = branch
       Form.shift
+      @@focus = branch
     end
 
     def self.shift
@@ -66,7 +66,7 @@ module Chishiki
       @@nlo_dir = 0
       @@nlo = 0
     end
-    
+
     def self.nlo_dir
       @@nlo_dir
     end

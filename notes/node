@@ -1,0 +1,8 @@
+insert body branch at @parent.children[0] on ^b.
+
+if branches readjust their POS based on whatever gets loaded above them, then this will insert between a tail and head.
+
+to fix fast rendering add a sleep(1) somehwere in game loop.
+
+branch::add_child  #child must be below all branching children above it.
+{ child.pos.y = self.pos.y + cib }

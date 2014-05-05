@@ -1,24 +1,28 @@
 module Chishiki
   class NilBranch
+    attr_accessor :parent
     def children
       []
     end
-    def parent
+    def cib
+      1
+    end
+    def name
+      "branch_0"
     end
   end
 
   class Branch
-    attr_accessor :pos, :children, :parent, :cib
+    attr_accessor :pos, :children, :parent, :cib, :name
     @@seek
-    def initialize(parent, pos)
-      $log.debug "new branch"
-      @parent = parent
-      if @parent.nil?
-        @@seek = self
-      end
-      @cib = 0
+    def initialize(node, pos)
+      $log.debug "=============new branch============"
+      @@seek = self unless !node.nil?
+      @parent = node
+      $log.debug "\tits parent is #{parent.name}"
+      @name = parent.name[0..-2] + ((parent.name[-1].to_i) + 1).to_s
+      @cib = 1
       @pos = pos
-      @pos.y += @pos.h
       @children = []
       @txt = Text.new(@pos.dup)
       @node = Label.new(@pos.dup.sh(-NODEWIDTH - PIPEWIDTH, 0), TYPES[type])
@@ -26,32 +30,30 @@ module Chishiki
       @height = 0
     end
 
-    def parent_t
+    def parent
+      $log.debug "NilBranch? #{@parent.nil?}"
       @parent.nil? ? NilBranch.new : @parent
     end
 
+    def leaf?
+      @children.empty?
+    end
+
     def type
-      if @parent == nil
-        :head
-      elsif @parent.children.size > 0
-        :body
-      else
-        :tail
-      end
+      leaf? ? :tail : :body
     end
 
-    def index
-      @parent.nil? ? 0 : @parent.children.index(self)
+    def [](index)
+      @children[index]
     end
 
-    def new_branch(expand, x=2, y=1)
-      if expand
-        @parent.new_branch false, 4, 2
-      else
-        br = Branch.new(self, @pos.dup.sh(x,@height+y))
-        @children.push br
-        br
-      end
+    def add_child
+      @cib += 1
+      px = @pos.sh(2, @cib * 1)
+      br = Branch.new(self, px.dup)
+      $log.debug "Added #{br.inspect}"
+      @children.insert 0, br
+      br
     end
 
     def next_child(dir)
@@ -65,7 +67,7 @@ module Chishiki
 
     def down
       c = next_child(1)
-      if c == nil 
+      if c == nil
         $log.debug "--4"
         if @children.size < 1
           self
@@ -95,18 +97,17 @@ module Chishiki
 
     def seek(&c)
       yield self
-      @parent.cib += 1 unless @parent.nil?
+      $log.debug "^Seek #{@name}^"
       @children.each do |x|
         x.seek &c
       end
     end
 
     def render
-      dir = Form.nlo_dir
       if @height > Form.nlo
-        @pos.y += dir
+        @pos.y += Form.nlo_dir
       else
-        @height += dir
+        @height += Form.nlo_dir
       end
       @node.draw
       @pipe.draw
@@ -116,8 +117,10 @@ module Chishiki
     def draw
       $log.debug "draw"
       @@seek.seek { |x| x.render }
-      #seek() { |x| x.render }
     end
 
+    def inspect
+      "#{name} : #{@pos}"
+    end
   end
 end
