@@ -20,13 +20,17 @@ module Chishiki
 
     $form = Form.new
     $form.draw
+    t = Time.now
     while ch != KEY_CTRL_Q
+      if t.to_f > SLEEPTIME
+      t1 = Time.now
       ch = wgetch stdscr
       $log.debug ch
       $form.update ch
       $form.draw
       doupdate
       wrefresh stdscr
+      end
     end
   rescue => err
   ensure

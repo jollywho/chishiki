@@ -9,4 +9,5 @@ module Chishiki
   TEXTHEIGHT = 1
   PIPEWIDTH = 20
   NODEWIDTH = 3
+  SLEEPTIME = 1.0/24.0
 end
