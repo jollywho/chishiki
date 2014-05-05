@@ -62,21 +62,10 @@ module Chishiki
     end
 
     def up
-      index == 0 ? left : next_child(-1)
+      @parent.nil? ? self : parent[0] == self ? parent : self
     end
 
     def down
-      c = next_child(1)
-      if c == nil
-        $log.debug "--4"
-        if @children.size < 1
-          self
-        else
-          @children[0]
-        end
-      else
-        c
-      end
     end
 
     def left
