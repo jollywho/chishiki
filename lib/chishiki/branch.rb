@@ -1,22 +1,5 @@
 module Chishiki
   class Branch
-  end
-  class NilBranch < Branch
-    attr_accessor :parent
-    def initialize
-    end
-    def children
-      []
-    end
-    def cib
-      1
-    end
-    def name
-      "branch_0"
-    end
-  end
-
-  class Branch
     attr_accessor :pos, :children, :parent, :cib, :name
     @@seek
     def initialize(node, pos)
@@ -116,5 +99,4 @@ module Chishiki
       "#{name} : #{@pos}"
     end
   end
-
 end
