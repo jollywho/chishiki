@@ -61,15 +61,21 @@ module Chishiki
       parent_t.children[index + dir]
     end
 
+    def last
+      @children.last.nil? ? self : @children.last
+    end
+
     def up
-      @parent.nil? ? self : parent[0] == self ? parent : self
+      @parent.nil? ? self :
+        parent.children.index(self) == 0 ? left :
+        parent.children[parent.children.index(self) - 1]
     end
 
     def down
     end
 
     def left
-      @parent.nil? ? self : @parent
+      @parent.nil? ? self : parent
     end
 
     def right
