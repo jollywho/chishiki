@@ -5,8 +5,13 @@ module Chishiki
       @amount = cib
       @pos = pos
     end
+
+    def render(y)
+      mvwaddstr stdscr, @pos.y + Form.os.y - y, @pos.x + Form.os.x, @msg
+    end
+
     def draw
-      mvwaddstr stdscr, @pos.y + Form.os.y, @pos.x + Form.os.x, @msg
+      @amount.times {|x| render x}
     end
   end
 end
