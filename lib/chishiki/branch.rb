@@ -8,13 +8,13 @@ module Chishiki
       @parent = node
       $log.debug "\tits parent is #{parent.name}"
       @name = parent.name[0..-2] + ((parent.name[-1].to_i) + 1).to_s
-      @cib = 1
       @pos = pos
       @children = []
       @txt = Text.new(@pos.dup)
       @node = Label.new(@pos.dup.sh(-NODEWIDTH - PIPEWIDTH, 0), TYPES[:head])
       @pipe = Label.new(@pos.dup.sh(-PIPEWIDTH, 0), PIPE * PIPEWIDTH)
       @height = 0
+      @cib = 0
     end
 
     def parent
@@ -34,10 +34,15 @@ module Chishiki
       @children[index]
     end
 
-    def add_branch
+    def inc_cib
       @cib += 1
-      px = @pos.sh(@cib > 2 ? 0 : 2, 1 + @height)
-      br = Branch.new(self, px.dup)
+      @parent.inc_cib unless @parent.nil?
+    end
+
+    def add_branch
+      inc_cib
+      px = @pos.dup.sh(2, @cib)
+      br = Branch.new(self, px)
       $log.debug "Added #{br.inspect}"
       @children.push br
       @height = 0
@@ -90,11 +95,6 @@ module Chishiki
     end
 
     def render
-      if @height > Form.nlo
-        @pos.y += Form.nlo_dir
-      else
-        @height += Form.nlo_dir
-      end
       @node.draw
       @pipe.draw
       @txt.draw

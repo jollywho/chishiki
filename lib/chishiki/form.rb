@@ -48,7 +48,7 @@ module Chishiki
 
     def ch_focus(branch)
       @@focus = branch
-      Form.shift
+  #    Form.shift
     end
 
     def self.shift
