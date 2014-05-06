@@ -13,13 +13,14 @@ module Chishiki
       @txt = Text.new(@pos.dup)
       @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head])
       @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), PIPE * -PIPEWIDTH)
-      @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1), parent.cib-1)
-      @height = 0
       @cib = 0
+      @height = 0
+      p = pipe_tar
+      n = pipe_tar.leaf ? -1 : 1
+      @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1), p.cib + n)
     end
 
     def parent
-      $log.debug "NilBranch? #{@parent.nil?}"
       @parent.nil? ? NilBranch.new : @parent
     end
 
@@ -36,7 +37,6 @@ module Chishiki
     end
 
     def inc_cib
-      #@cib += 2
       @cib += 2
       @parent.inc_cib unless @parent.nil?
     end
@@ -53,6 +53,12 @@ module Chishiki
 
     def add_leaf
       @parent.nil? ? self : parent.add_branch
+    end
+
+    def pipe_tar
+      @parent.nil? ? self :
+        parent.leaf ? parent :
+        parent.children.last
     end
 
     def up
