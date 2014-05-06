@@ -12,7 +12,7 @@ module Chishiki
       @pos = pos
       @children = []
       @txt = Text.new(@pos.dup)
-      @node = Label.new(@pos.dup.sh(-NODEWIDTH - PIPEWIDTH, 0), TYPES[type])
+      @node = Label.new(@pos.dup.sh(-NODEWIDTH - PIPEWIDTH, 0), TYPES[:head])
       @pipe = Label.new(@pos.dup.sh(-PIPEWIDTH, 0), PIPE * PIPEWIDTH)
       @height = 0
     end
@@ -36,10 +36,11 @@ module Chishiki
 
     def add_branch
       @cib += 1
-      px = @pos.sh(@cib > 2 ? 0 : 2, 2)
+      px = @pos.sh(@cib > 2 ? 0 : 2, 1 + @height)
       br = Branch.new(self, px.dup)
       $log.debug "Added #{br.inspect}"
       @children.push br
+      @height = 0
       br
     end
 
