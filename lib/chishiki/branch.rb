@@ -13,7 +13,7 @@ module Chishiki
       @txt = Text.new(@pos.dup)
       @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head])
       @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), PIPE * -PIPEWIDTH)
-      @pipe = Pipe.new(@pos.dup.sh(NODESTART, 0), parent.cib)
+      @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1), parent.cib-1)
       @height = 0
       @cib = 0
     end
@@ -37,7 +37,7 @@ module Chishiki
 
     def inc_cib
       #@cib += 2
-      @cib += 1
+      @cib += 2
       @parent.inc_cib unless @parent.nil?
     end
 
@@ -97,10 +97,10 @@ module Chishiki
     end
 
     def render
+      @pipe.draw
       @node.draw
       @wpipe.draw
       @txt.draw
-      @pipe.draw
     end
 
     def draw
