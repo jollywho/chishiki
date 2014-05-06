@@ -54,7 +54,7 @@ module Chishiki
     def self.shift
       clear
       @@offset.x = $center.x - @@focus.pos.x + @@focus.pos.w/2
-      @@offset.y = $center.y - @@focus.pos.y + @@focus.pos.h/2
+    #  @@offset.y = $center.y - @@focus.pos.y + @@focus.pos.h/2
     end
 
     def self.bump_nlo(y, dir)

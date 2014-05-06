@@ -13,6 +13,7 @@ module Chishiki
       @txt = Text.new(@pos.dup)
       @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head])
       @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), PIPE * -PIPEWIDTH)
+      @pipe = Pipe.new(@pos.dup.sh(NODESTART, 0), parent.cib)
       @height = 0
       @cib = 0
     end
