@@ -45,7 +45,7 @@ module Chishiki
     end
 
     def add_leaf
-      parent.add_branch
+      @parent.nil? ? self : parent.add_branch
     end
 
     def up
