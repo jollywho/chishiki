@@ -13,7 +13,8 @@ module Chishiki
     initscr
     raw
     start_color
-    use_default_colors 
+  init_pair(1,  Color::RED,     Color::BLACK)
+    attr_set A_NORMAL, 1, nil
     noecho
     curs_set 2
     ch = 0
