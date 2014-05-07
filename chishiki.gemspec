@@ -3,6 +3,8 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'chishiki/version'
 
+date = "2014-05-06"
+
 Gem::Specification.new do |spec|
   spec.name          = "chishiki"
   spec.version       = Chishiki::VERSION
