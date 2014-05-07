@@ -4,14 +4,6 @@
 require 'ffi-ncurses'
 require 'logger'
 include FFI::NCurses
-def key(s)
-  case s
-  when String
-    s.unpack("U")[0]
-  else
-    s
-  end
-end
 module Chishiki
   Dir["./chishiki/*.rb"].each {|file| require file}
   $log = Logger.new("log")
@@ -31,17 +23,13 @@ module Chishiki
 
     $form = Form.new
     $form.draw
-    t = Time.now
     while ch != KEY_CTRL_Q
-      if t.to_f > SLEEPTIME
-      t1 = Time.now
       ch = wgetch stdscr
       $log.debug ch
       $form.update ch
       $form.draw
       doupdate
       wrefresh stdscr
-      end
     end
   rescue => err
   ensure
