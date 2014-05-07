@@ -47,6 +47,7 @@ module Chishiki
 
     def draw
       $log.debug "line draw--"
+      attr_set A_NORMAL, 3, nil
       mvwaddstr stdscr, @pos.y + Form.os.y, @pos.x + Form.os.x, @msg
     end
   end

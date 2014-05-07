@@ -11,8 +11,8 @@ module Chishiki
       @pos = pos
       @children = []
       @txt = Text.new(@pos.dup)
-      @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head])
-      @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), PIPE * -PIPEWIDTH)
+      @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head], 4)
+      @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), "-" * -PIPEWIDTH, 2)
       @cib = 0
       @height = 0
       p = pipe_tar

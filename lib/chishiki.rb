@@ -4,6 +4,14 @@
 require 'ffi-ncurses'
 require 'logger'
 include FFI::NCurses
+def key(s)
+  case s
+  when String
+    s.unpack("U")[0]
+  else
+    s
+  end
+end
 module Chishiki
   Dir["./chishiki/*.rb"].each {|file| require file}
   $log = Logger.new("log")
@@ -13,8 +21,10 @@ module Chishiki
     initscr
     raw
     start_color
-  init_pair(1,  Color::RED,     Color::BLACK)
-    attr_set A_NORMAL, 1, nil
+    init_pair(1,  Color::RED,     Color::BLACK)
+    init_pair(2,  Color::GREEN,  Color::BLACK)
+    init_pair(3,  Color::WHITE,   Color::BLACK)
+    init_pair(4,  Color::MAGENTA, Color::BLACK)
     noecho
     curs_set 2
     ch = 0

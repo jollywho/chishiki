@@ -7,6 +7,7 @@ module Chishiki
     end
 
     def render(y)
+      attr_set A_NORMAL, 1, nil
       mvwaddstr stdscr, @pos.y + Form.os.y - y, @pos.x + Form.os.x, @msg
     end
 
