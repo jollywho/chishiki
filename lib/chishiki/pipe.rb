@@ -11,6 +11,7 @@ module Chishiki
     end
 
     def draw
+      $log.debug @amount
       @amount.times {|x| render x}
     end
   end

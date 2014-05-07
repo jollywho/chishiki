@@ -9,6 +9,9 @@ module Chishiki
     def cib
       1
     end
+    def leaf
+      true
+    end
     def name
       "branch_0"
     end
