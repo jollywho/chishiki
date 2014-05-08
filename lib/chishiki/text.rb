@@ -29,14 +29,6 @@ module Chishiki
       end
     end
 
-    def shift(pos) # rel
-      $log.debug "move text"
-      $log.debug "#{pos.x},#{pos.y}"
-      @pos.x = pos.x
-      @pos.y = pos.y
-      @list.each { |x| z.move(pos) }
-    end
-
     def curs
       @list[@index].curs
     end
@@ -53,6 +45,9 @@ module Chishiki
     end
 
     def draw
+      if @pos.y > Form.nlo
+        @pos.y += Form.nlo_dir
+      end
       @list.each { |x| x.draw }
     end
   end

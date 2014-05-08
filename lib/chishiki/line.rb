@@ -38,16 +38,13 @@ module Chishiki
       end
     end
 
-    def shift(pos)
-      @curs.x += pos.x
-      @curs.y += pos.y
-      @pos.x = x
-      @pos.y = y + @line
-    end
-
     def draw
       $log.debug "line draw--"
       attr_set A_NORMAL, 3, nil
+      if @pos.y > Form.nlo
+        @pos.y += Form.nlo_dir
+        @curs.y += Form.nlo_dir
+      end
       mvwaddstr stdscr, @pos.y + Form.os.y, @pos.x + Form.os.x, @msg
     end
   end

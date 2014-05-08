@@ -1,6 +1,7 @@
 module Chishiki
   class Form
     def initialize
+      @@focus = nil
       @list = []
       win = getmaxyx stdscr
       @window = Pos.new(0,0,win[1],win[0])
@@ -64,11 +65,15 @@ module Chishiki
     end
 
     def self.bump_nlo(y, dir)
-      @@nlo_dir = dir
       @@nlo = y
+      @@nlo_dir = dir
+      if @@focus != nil
+        shift
+      end
     end
 
     def self.reset_nlo
+      $log.debug "NLO #{@@nlo_dir}"
       @@nlo_dir = 0
       @@nlo = 0
     end
