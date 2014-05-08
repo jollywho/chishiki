@@ -12,7 +12,9 @@ module Chishiki
     end
 
     def draw
-      $log.debug @amount
+      if @pos.y > Form.nlo
+        @pos.y += Form.nlo_dir
+      end
       @amount.times {|x| render x}
     end
   end
