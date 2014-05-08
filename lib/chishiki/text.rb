@@ -15,6 +15,7 @@ module Chishiki
     def new_line
       @index += 1
       @list.push Line.new(@pos.dup, @index)
+      Form.bump_nlo @list[@index].pos.y, 1
     end
 
     def size
@@ -23,6 +24,7 @@ module Chishiki
 
     def del_line
       if @list.size > 1
+        Form.bump_nlo @list[@index].pos.y, -1
         @list.delete_at(@index)
         @index -= 1
         @list[@index].del
