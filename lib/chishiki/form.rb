@@ -4,6 +4,10 @@ module Chishiki
       @list = []
       win = getmaxyx stdscr
       @window = Pos.new(0,0,win[1],win[0])
+      @@clear = Label.new(Pos.new(
+        0,0,@window.w, @window.h),
+        " " * @window.w * @window.h, 0)
+      $log.debug @clear
       $center = Pos.new(
         @window.w/2.0 - TEXTWIDTH/2.0,
         @window.h/2.0 - TEXTHEIGHT/2.0)
@@ -36,6 +40,8 @@ module Chishiki
         ch_focus @@focus.add_leaf
       elsif ch == 14 # ^n
         ch_focus @@focus.add_branch
+      elsif ch == 48 # 0
+        ch_focus @@focus
       else
         @@focus.handle_key ch
       end
@@ -48,13 +54,13 @@ module Chishiki
 
     def ch_focus(branch)
       @@focus = branch
-  #    Form.shift
+      Form.shift
     end
 
     def self.shift
-      clear
+      @@clear.draw_abs
       @@offset.x = $center.x - @@focus.pos.x + @@focus.pos.w/2
-    #  @@offset.y = $center.y - @@focus.pos.y + @@focus.pos.h/2
+      @@offset.y = $center.y - @@focus.pos.y + @@focus.pos.h/2
     end
 
     def self.bump_nlo(y, dir)
