@@ -18,3 +18,13 @@ when following child branches, add to parent.inbound for each hop.
 creating a new peer should be inserting below parent, not below focus.
 the insert should cause a line addition.
 why doesn't line addition cause the lines below to bump?
+
+
+#branches calculate CIB during seek based on whether they are onscreen or not.
+#these add their string to Screen's list of string objects and positions.
+#if a string is clipped on screen bounds, it gets split based on how it is offsceen.
+##textbox lines with strings too long will wrap by default. this is a problem!
+##the textbox should not be resized to fit. it should be cropped line labels.
+##resizing the height would cascade down the branch chain.
+
+#have focus branch's pipes colored differently.
