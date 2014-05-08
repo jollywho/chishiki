@@ -9,7 +9,7 @@ module Chishiki
         " " * @window.w * @window.h, 0)
       $log.debug @clear
       $center = Pos.new(
-        @window.w/2.0 - TEXTWIDTH/2.0,
+        @window.w/2.0 - TEXTWIDTH/4.0,
         @window.h/2.0 - TEXTHEIGHT/2.0)
       @@offset = Pos.new
       @@nlo_dir = 0
