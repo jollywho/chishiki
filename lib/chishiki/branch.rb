@@ -16,7 +16,7 @@ module Chishiki
       @cib = 0
       @height = 0
       p = pipe_tar
-      n = parent.leaf ? -1 : 0
+      n = parent.leaf ? -1 : 1
       @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1), p.cib + n)
     end
 
@@ -36,13 +36,13 @@ module Chishiki
       @children[index]
     end
 
-    def inc_cib
-      @cib += 1
-      @parent.inc_cib unless @parent.nil?
+    def inc_cib(x)
+      @cib += x
+      @parent.inc_cib x unless @parent.nil?
     end
 
     def add_branch
-      inc_cib
+      inc_cib 2
       px = @pos.dup.sh(2, @cib)
       br = Branch.new(self, px)
       $log.debug "Added #{br.inspect}"
@@ -88,6 +88,7 @@ module Chishiki
 
     def handle_key(ch)
       @txt.handle_key ch
+      inc_cib 1 unless !@txt.grow!
     end
 
     def focus
@@ -103,11 +104,6 @@ module Chishiki
     end
 
     def render
-      if @pos.y > Form.nlo
-        @pos.y += Form.nlo_dir
-      else
-        @cib += Form.nlo_dir
-      end
       @pipe.draw
       @node.draw
       @wpipe.draw
