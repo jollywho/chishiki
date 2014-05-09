@@ -19,6 +19,8 @@ module Chishiki
       p = pipe_tar
       n = parent.leaf ? -1 : 0
       @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1), p.cib + n)
+      @widgets = []
+      @widgets << @pipe << @node << @wpipe << @txt
     end
 
     def parent
@@ -114,15 +116,9 @@ module Chishiki
       elsif @pos.y >= Form.nlo
         $log.debug "DID Pos #{@pos.y} Form #{Form.nlo}"
         @pos.y += Form.nlo_dir
-        @pipe.move Form.nlo_dir
-        @node.move Form.nlo_dir
-        @wpipe.move Form.nlo_dir
-        @txt.move Form.nlo_dir
+        @widgets.each { |x| x.move Form.nlo_dir}
       end
-      @pipe.draw
-      @node.draw
-      @wpipe.draw
-      @txt.draw
+      @widgets.each { |x| x.draw }
     end
 
     def draw
