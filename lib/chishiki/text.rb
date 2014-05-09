@@ -16,7 +16,7 @@ module Chishiki
       @grow = true
       @index += 1
       @list.push Line.new(@pos.dup, @index)
-      Form.bump_nlo @list[@index].pos.y, 1
+      Form.bump_nlo @list[@index].pos.y, 2
     end
 
     def grow!
@@ -38,7 +38,7 @@ module Chishiki
     def del_line
       if @list.size > 1
         @shrink = true
-        Form.bump_nlo @list[@index].pos.y, -1
+        Form.bump_nlo @list[@index].pos.y, -2
         @list.delete_at(@index)
         @index -= 1
         @list[@index].del
@@ -60,10 +60,11 @@ module Chishiki
       end
     end
 
+    def move(y)
+      @pos.y += y
+    end
+
     def draw
-      if @pos.y > Form.nlo
-        @pos.y += Form.nlo_dir
-      end
       @list.each { |x| x.draw }
     end
   end

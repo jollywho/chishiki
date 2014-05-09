@@ -15,6 +15,7 @@ module Chishiki
       @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), "-" * -PIPEWIDTH, 2)
       @cib = 0
       @height = 0
+      @created = true
       p = pipe_tar
       n = parent.leaf ? -1 : 0
       @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1), p.cib + n)
@@ -101,15 +102,22 @@ module Chishiki
 
     def seek(&c)
       yield self
-      $log.debug "^Seek #{@name}^"
       @children.each do |x|
         x.seek &c
       end
     end
 
     def render
-      if @pos.y > Form.nlo
+      if @created
+        $log.debug "Didn't created #{@pos.y}"
+        @created = false
+      elsif @pos.y >= Form.nlo
+        $log.debug "DID Pos #{@pos.y} Form #{Form.nlo}"
         @pos.y += Form.nlo_dir
+        @pipe.move Form.nlo_dir
+        @node.move Form.nlo_dir
+        @wpipe.move Form.nlo_dir
+        @txt.move Form.nlo_dir
       end
       @pipe.draw
       @node.draw
@@ -118,7 +126,6 @@ module Chishiki
     end
 
     def draw
-      $log.debug "draw"
       @@seek.seek { |x| x.render }
     end
 

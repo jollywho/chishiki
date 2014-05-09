@@ -11,10 +11,12 @@ module Chishiki
       mvwaddstr stdscr, @pos.y + Form.os.y - y, @pos.x + Form.os.x, @msg
     end
 
+    def move(y)
+      @amount += y
+      @pos.y += y
+    end
+
     def draw
-      if @pos.y > Form.nlo
-        @pos.y += Form.nlo_dir
-      end
       @amount.times {|x| render x}
     end
   end
