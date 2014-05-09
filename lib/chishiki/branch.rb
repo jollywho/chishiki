@@ -42,7 +42,7 @@ module Chishiki
     end
 
     def add_branch
-      inc_cib 2
+      inc_cib 1
       px = @pos.dup.sh(2, @cib)
       br = Branch.new(self, px)
       $log.debug "Added #{br.inspect}"
@@ -88,7 +88,11 @@ module Chishiki
 
     def handle_key(ch)
       @txt.handle_key ch
+    end
+
+    def handle_growth
       inc_cib 1 unless !@txt.grow!
+      inc_cib -1 unless !@txt.shrink!
     end
 
     def focus
@@ -104,6 +108,9 @@ module Chishiki
     end
 
     def render
+      if @pos.y > Form.nlo
+        @pos.y += Form.nlo_dir
+      end
       @pipe.draw
       @node.draw
       @wpipe.draw

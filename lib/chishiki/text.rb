@@ -25,13 +25,19 @@ module Chishiki
       was
     end
 
+    def shrink!
+      was = @shrink
+      @shrink = false
+      was
+    end
+
     def size
       @list.size
     end
 
     def del_line
       if @list.size > 1
-        @grow = false
+        @shrink = true
         Form.bump_nlo @list[@index].pos.y, -1
         @list.delete_at(@index)
         @index -= 1

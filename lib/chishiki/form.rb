@@ -74,6 +74,7 @@ module Chishiki
 
     def self.reset_nlo
       $log.debug "NLO #{@@nlo_dir}"
+      @@focus.handle_growth
       @@nlo_dir = 0
       @@nlo = 0
     end
