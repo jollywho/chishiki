@@ -16,7 +16,7 @@ module Chishiki
       @cib = 0
       @height = 0
       p = pipe_tar
-      n = parent.leaf ? -1 : 1
+      n = parent.leaf ? -1 : 0
       @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1), p.cib + n)
     end
 
