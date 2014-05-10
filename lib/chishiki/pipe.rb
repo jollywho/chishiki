@@ -15,6 +15,7 @@ module Chishiki
 
     def move(y)
       @pos.y += y
+      @amount += y
     end
 
     def draw
