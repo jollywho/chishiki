@@ -17,7 +17,7 @@ module Chishiki
       @height = 0
       @created = true
       @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1),
-                       self.parent.dup, pipe_tar.dup)
+                       self.parent, pipe_tar)
       @widgets = []
       @widgets << @pipe << @node << @wpipe << @txt
     end
@@ -113,7 +113,7 @@ module Chishiki
       if @created
         $log.debug "Didn't created #{@pos.y}"
         @created = false
-      elsif @pos.y >= Form.nlo
+      elsif @pos.y >= Form.nlo and Form.nlo_dir != 0
         $log.debug "DID Pos #{@pos.y} Form #{Form.nlo}"
         @pos.y += Form.nlo_dir
         @widgets.each { |x| x.move Form.nlo_dir }

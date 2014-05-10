@@ -58,6 +58,10 @@ module Chishiki
       Form.shift
     end
 
+    def self.focus
+      @@focus
+    end
+
     def self.shift
       @@clear.draw_abs
       @@offset.x = $center.x - @@focus.pos.x + @@focus.pos.w/2

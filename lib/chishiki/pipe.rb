@@ -5,7 +5,9 @@ module Chishiki
       @pos = pos
       @parent = par
       @target = tar
-      @amount = @target.cib + (@parent.leaf ? -1 : 0)
+      @change = @target.cib
+      @offset = @parent.leaf ? -1 : 0
+      @amount = @change + @offset
     end
 
     def render(y)
@@ -15,7 +17,9 @@ module Chishiki
 
     def move(y)
       @pos.y += y
-      @amount += y
+      if @pos.y > Form.nlo and @target.pos.y < Form.nlo
+        @amount += y
+      end
     end
 
     def draw

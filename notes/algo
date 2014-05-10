@@ -28,3 +28,15 @@ why doesn't line addition cause the lines below to bump?
 ##resizing the height would cascade down the branch chain.
 
 #have focus branch's pipes colored differently.
+
+
+#problem is growth is attached to CIB. line adds need to be separate so they can be undone.
+
+
+:line growth with pipes:
+#first child
+#peer below you
+#when the cib cascades upwards recursively on parents
+
+
+#does the focus land between my target and myself? increase my amount if so.
