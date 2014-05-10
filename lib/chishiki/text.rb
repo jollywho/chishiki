@@ -9,14 +9,14 @@ module Chishiki
       @index = -1
       $log.debug "new Text"
       $log.debug @pos
-      new_line
+      new_line(2)
     end
 
-    def new_line
+    def new_line(y)
       @grow = true
       @index += 1
       @list.push Line.new(@pos.dup, @index)
-      Form.bump_nlo @list[@index].pos.y, 1
+      Form.bump_nlo @list[@index].pos.y, y
     end
 
     def grow!
@@ -54,9 +54,9 @@ module Chishiki
       if ch == 127 # delete
         del_line unless @list[@index].del
       elsif ch == 10 # newline
-        new_line unless @list.size < @index
+        new_line(1) unless @list.size < @index
       else # regular processing
-        new_line unless @list[@index].add_ch ch
+        new_line(1) unless @list[@index].add_ch ch
       end
     end
 
