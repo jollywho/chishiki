@@ -1,9 +1,11 @@
 module Chishiki
   class Pipe
-    def initialize(pos, cib)
+    def initialize(pos, par, tar)
       @msg = "|"
-      @amount = cib
       @pos = pos
+      @parent = par
+      @target = tar
+      @amount = @target.cib + (@parent.leaf ? -1 : 0)
     end
 
     def render(y)
@@ -12,7 +14,6 @@ module Chishiki
     end
 
     def move(y)
-      @amount += y
       @pos.y += y
     end
 

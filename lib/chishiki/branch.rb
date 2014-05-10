@@ -16,9 +16,8 @@ module Chishiki
       @cib = 0
       @height = 0
       @created = true
-      p = pipe_tar
-      n = parent.leaf ? -1 : 0
-      @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1), p.cib + n)
+      @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1),
+                       self.parent.dup, pipe_tar.dup)
       @widgets = []
       @widgets << @pipe << @node << @wpipe << @txt
     end
@@ -40,6 +39,7 @@ module Chishiki
     end
 
     def inc_cib(x)
+      $log.debug "INC CIB #{x}"
       @cib += x
       @parent.inc_cib x unless @parent.nil?
     end
@@ -116,7 +116,7 @@ module Chishiki
       elsif @pos.y >= Form.nlo
         $log.debug "DID Pos #{@pos.y} Form #{Form.nlo}"
         @pos.y += Form.nlo_dir
-        @widgets.each { |x| x.move Form.nlo_dir}
+        @widgets.each { |x| x.move Form.nlo_dir }
       end
       @widgets.each { |x| x.draw }
     end

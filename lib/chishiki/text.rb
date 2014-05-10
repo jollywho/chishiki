@@ -62,6 +62,7 @@ module Chishiki
 
     def move(y)
       @pos.y += y
+      @list.each { |x| x.move(y) }
     end
 
     def draw
