@@ -8,7 +8,7 @@ module Chishiki
 
     def draw
       attr_set A_NORMAL, @color, nil
-      mvwaddstr stdscr, @pos.y + Form.os.y, @pos.x + Form.os.x, @msg
+      Renderer.draw(@pos.x, @pos.y, @msg)
     end
 
     def move(y)

@@ -4,14 +4,14 @@ module Chishiki
       @@focus = nil
       @list = []
       win = getmaxyx stdscr
-      @window = Pos.new(0,0,win[1],win[0])
+      $window = Pos.new(0,0,win[1],win[0])
       @@clear = Label.new(Pos.new(
-        0,0,@window.w, @window.h),
-        " " * @window.w * @window.h, 0)
+        0,0,$window.w, $window.h),
+        " " * $window.w * $window.h, 0)
       $log.debug @clear
       $center = Pos.new(
-        @window.w/2.0 - TEXTWIDTH/4.0,
-        @window.h/2.0 - TEXTHEIGHT/2.0)
+        $window.w/2.0 - TEXTWIDTH/4.0,
+        $window.h/2.0 - TEXTHEIGHT/2.0)
       @@offset = Pos.new
       @@nlo_dir = 0
       @@nlo = 0

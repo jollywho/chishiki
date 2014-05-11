@@ -43,7 +43,7 @@ module Chishiki
 
     def draw
       attr_set A_NORMAL, 3, nil
-      mvwaddstr stdscr, @pos.y + Form.os.y, @pos.x + Form.os.x, @msg
+      Renderer.draw(@pos.x, @pos.y, @msg)
     end
   end
 end
