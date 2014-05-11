@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 #
 #
+require 'pry'
 require 'ffi-ncurses'
 require 'logger'
 include FFI::NCurses
@@ -13,6 +14,7 @@ module Chishiki
     initscr
     raw
     start_color
+    keypad stdscr, true
     init_pair(1,  Color::RED,     Color::BLACK)
     init_pair(2,  Color::GREEN,  Color::BLACK)
     init_pair(3,  Color::WHITE,   Color::BLACK)
