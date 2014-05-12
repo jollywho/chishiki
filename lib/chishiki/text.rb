@@ -46,7 +46,7 @@ module Chishiki
     end
 
     def del_all
-      Form.bump_nlo @pos.y, -@list.size - 1
+      Form.bump_nlo @pos.y - 1, -@list.size - 1
     end
 
     def curs
