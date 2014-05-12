@@ -63,6 +63,7 @@ module Chishiki
         self
       else
         @txt.del_all
+        @children.each { |x| x.delete }
         inc_cib -@txt.size - 1
         u = up
         @parent.children.delete(self)
