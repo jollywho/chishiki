@@ -58,14 +58,15 @@ module Chishiki
       @parent.nil? ? self : parent.add_branch
     end
 
-    def delete
+    def delete_branch
       if @parent.nil?
         self
       else
-        @txt.del_all
-        @children.each { |x| x.delete }
-        inc_cib -@txt.size - 1
         u = up
+        t = 0
+        $log.debug "CIB #{@cib}"
+        Form.bump_nlo @pos.y - 1, -@cib - 1
+        inc_cib -@cib - 1
         @parent.children.delete(self)
         u
       end

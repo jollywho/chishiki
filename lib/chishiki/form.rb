@@ -28,7 +28,7 @@ module Chishiki
     def update(ch)
       Form.reset_nlo
       if ch == 6 # ^f
-        ch_focus @@focus.delete
+        ch_focus @@focus.delete_branch
       elsif ch == 49 # !
         ch_focus @@focus.up
       elsif ch == 50 # 1
