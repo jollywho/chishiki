@@ -64,7 +64,12 @@ module Chishiki
       else
         u = up
         d = down
-        d.swap_tar(u, d.cib + u.cib + 1)
+        ix= parent.children.index(self)
+        if ix != parent.children.size and ix != 0
+          d.swap_tar(u, @cib + u.cib + 1)
+        else
+          d.swap_tar(u, @cib + 2)
+        end
         @parent.children.delete(self)
         Form.bump_nlo @pos.y - 1, -@cib - 1
         inc_cib -@cib - 1
