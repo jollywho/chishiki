@@ -17,7 +17,14 @@ module Chishiki
       @@nlo = 0
       @@focus = Branch.new(nil, Pos.new)
       Form.shift
-      ch_mode
+      @mode = ModeHandler.instance
+      @mode.store :nav, 49, Proc.new { ch_focus @@focus.up }
+      @mode.store :nav, 50, Proc.new { ch_focus @@focus.down }
+      @mode.store :nav, 51, Proc.new { ch_focus @@focus.left }
+      @mode.store :nav, 52, Proc.new { ch_focus @@focus.right }
+      @mode.store :nav, 2, Proc.new { ch_focus @@focus.add_leaf }
+      @mode.store :nav, 6, Proc.new { ch_focus @@focus.delete_branch }
+      @mode.store :nav, 14, Proc.new { ch_focus @@focus.add_branch }
     end
 
     def ch_mode
@@ -27,25 +34,8 @@ module Chishiki
 
     def update(ch)
       Form.reset_nlo
-      if ch == 6 # ^f
-        ch_focus @@focus.delete_branch
-      elsif ch == 49 # !
-        ch_focus @@focus.up
-      elsif ch == 50 # 1
-        ch_focus @@focus.down
-      elsif ch == 51 # 2
-        ch_focus @@focus.left
-      elsif ch == 52 # 3
-        ch_focus @@focus.right
-      elsif ch == 2 # ^b
-        ch_focus @@focus.add_leaf
-      elsif ch == 14 # ^n
-        ch_focus @@focus.add_branch
-      elsif ch == 48 # 0
-        ch_focus @@focus
-      else
-        @@focus.handle_key ch
-      end
+      ch = @mode.swallow ch
+      @@focus.handle_key ch unless ch.nil?
     end
 
     def draw

@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 #
 #
-require 'pry'
 require 'ffi-ncurses'
 require 'logger'
 include FFI::NCurses
