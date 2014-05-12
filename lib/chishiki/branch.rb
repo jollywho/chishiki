@@ -1,6 +1,6 @@
 module Chishiki
   class Branch
-    attr_accessor :pos, :children, :parent, :cib, :name
+    attr_accessor :pos, :children, :parent, :cib, :name, :pipe
     @@seek
     def initialize(node, pos)
       $log.debug "=============new branch============"
@@ -63,13 +63,17 @@ module Chishiki
         self
       else
         u = up
-        t = 0
-        $log.debug "CIB #{@cib}"
+        d = down
+        d.swap_tar(u, d.cib + u.cib + 1)
+        @parent.children.delete(self)
         Form.bump_nlo @pos.y - 1, -@cib - 1
         inc_cib -@cib - 1
-        @parent.children.delete(self)
         u
       end
+    end
+
+    def swap_tar(tar, cib)
+      @pipe.swap_tar tar, cib
     end
 
     def pipe_tar
@@ -87,9 +91,7 @@ module Chishiki
     def down
       $log.debug "DOWN"
       d = parent.children.index(self)
-      $log.debug d
       d = parent[parent.children.index(self) + 1] unless d.nil?
-      $log.debug d
       !d.nil? ? d : !leaf ? right :  self
     end
 

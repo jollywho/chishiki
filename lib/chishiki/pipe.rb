@@ -1,5 +1,6 @@
 module Chishiki
   class Pipe
+    attr_accessor :pos, :amount
     def initialize(pos, par, tar)
       @msg = "|"
       @pos = pos
@@ -13,6 +14,11 @@ module Chishiki
     def render(y)
       attr_set A_NORMAL, 1, nil
       mvwaddstr stdscr, @pos.y + Form.os.y - y, @pos.x + Form.os.x, @msg
+    end
+
+    def swap_tar(tar, cib)
+      @target = tar
+      @amount = cib
     end
 
     def move(y)
