@@ -35,7 +35,7 @@ module Chishiki
       @list.size
     end
 
-    def del_line
+    def del_line()
       if @list.size > 1
         @shrink = true
         Form.bump_nlo @list[@index].pos.y, -1
@@ -43,6 +43,10 @@ module Chishiki
         @index -= 1
         @list[@index].del
       end
+    end
+
+    def del_all
+      Form.bump_nlo @pos.y, -@list.size - 1
     end
 
     def curs

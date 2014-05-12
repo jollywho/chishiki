@@ -18,7 +18,6 @@ module Chishiki
     def move(y)
       @pos.y += y
       if @pos.y >= Form.nlo and @target.pos.y < Form.nlo
-        $log.debug "in pos"
         @amount += y
       end
     end

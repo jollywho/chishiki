@@ -28,8 +28,8 @@ module Chishiki
     def update(ch)
       Form.reset_nlo
       if ch == 6 # ^f
+        ch_focus @@focus.delete
       elsif ch == 49 # !
-        ch_mode
         ch_focus @@focus.up
       elsif ch == 50 # 1
         ch_focus @@focus.down

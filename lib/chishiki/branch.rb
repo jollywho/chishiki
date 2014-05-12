@@ -58,6 +58,18 @@ module Chishiki
       @parent.nil? ? self : parent.add_branch
     end
 
+    def delete
+      if @parent.nil?
+        self
+      else
+        @txt.del_all
+        inc_cib -@txt.size - 1
+        u = up
+        @parent.children.delete(self)
+        u
+      end
+    end
+
     def pipe_tar
       @parent.nil? ? self :
         parent.leaf ? parent :
