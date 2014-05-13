@@ -9,6 +9,7 @@ module Chishiki
   $log = Logger.new("log")
  # $log.level = Logger::ERROR
   $log.debug "***************"
+
   begin
     initscr
     raw
@@ -24,10 +25,18 @@ module Chishiki
     curs_set 2
     ch = 0
 
+    Renderer.init
     $form = Form.new
     $form.draw
     while ch != KEY_CTRL_Q
       ch = wgetch stdscr
+      if ch == FFI::NCurses::KEY_RESIZE
+        ch = nil
+        FFI::NCurses.endwin
+        Renderer.init
+        $form.init
+        Form.shift
+      end
       $log.debug ch
       $form.update ch
       $form.draw
