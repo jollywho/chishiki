@@ -11,6 +11,10 @@ module Chishiki
       @modes[@cur]
     end
 
+    def get_mode
+      @cur
+    end
+
     def swap_modes
       @cur = @cur == :nav ? :edit : :nav
     end

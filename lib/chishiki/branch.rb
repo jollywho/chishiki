@@ -12,14 +12,15 @@ module Chishiki
       @children = []
       @txt = Text.new(@pos.dup)
       @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head], 4)
-      @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), "-" * -PIPEWIDTH, 2)
+      @marker = Label.new(@pos.dup.sh(MARKERWIDTH, 0), MARKER_F_N, 2)
+      @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), CHAR_WPIPE * PIPESIZE, 2)
       @cib = 0
       @height = 0
       @created = true
       @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1),
                        self.parent, pipe_tar)
       @widgets = []
-      @widgets << @pipe << @node << @wpipe << @txt
+      @widgets << @pipe << @marker << @node << @wpipe << @txt
     end
 
     def parent
@@ -108,6 +109,18 @@ module Chishiki
     def right
       $log.debug "RIGHT"
       leaf ? self : @children[0]
+    end
+
+    def set_marker_edit
+      @marker.set_msg MARKER_F_E
+    end
+
+    def set_marker_normal
+      @marker.set_msg MARKER_F_N
+    end
+
+    def unset_marker
+      @marker.set_msg MARKER_N_N
     end
 
     def handle_key(ch)

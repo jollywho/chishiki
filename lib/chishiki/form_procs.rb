@@ -8,8 +8,8 @@ module Chishiki
       @mode.store :nav,  2,  Proc.new { ch_focus @@focus.add_leaf }
       @mode.store :nav,  6,  Proc.new { ch_focus @@focus.delete_branch }
       @mode.store :nav,  14, Proc.new { ch_focus @@focus.add_branch }
-      @mode.store :nav,  65, Proc.new { @mode.swap_modes }
-      @mode.store :edit, 27, Proc.new { @mode.swap_modes }
+      @mode.store :nav,  65, Proc.new { @mode.swap_modes; set_marker }
+      @mode.store :edit, 27, Proc.new { @mode.swap_modes; set_marker }
     end
   end
 end
