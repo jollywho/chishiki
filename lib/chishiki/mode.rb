@@ -12,10 +12,11 @@ module Chishiki
     end
 
     def swap_modes
-      @mode == :nav ? :edit : :nav
+      @cur = @cur == :nav ? :edit : :nav
     end
 
     def swallow(ch)
+      $log.debug "MODE #{mode}"
       mode.call(ch).nil? ? ch : nil
     end
 
@@ -32,6 +33,8 @@ class Mode
   def store(ch, p)
     @procs[ch] = p
   end
+  def to_s
+  end
   def call(ch)
     p = @procs[ch]
     p.nil? ? nil : p.call
@@ -39,7 +42,13 @@ class Mode
 end
 
 class Nav < Mode
+  def to_s
+    "Nav"
+  end
 end
 
 class Edit < Mode
+  def to_s
+    "Edit"
+  end
 end

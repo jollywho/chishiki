@@ -29,9 +29,9 @@ module Chishiki
       if @curs.x + 1 >= @pos.x + @pos.w
         false
       else
-        $log.debug "line add ch"
-        @msg += ch.chr
-        @curs.x = @pos.x + @msg.size
+          $log.debug "line add #{ch}"
+          @msg += ch.chr.scan(/[[:print:]]/).join
+          @curs.x = @pos.x + @msg.size
         true
       end
     end
