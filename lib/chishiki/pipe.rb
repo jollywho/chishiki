@@ -9,11 +9,16 @@ module Chishiki
       @change = @target.cib
       @offset = @parent.leaf ? -1 : 0
       @amount = @change + @offset
+      @color = 1
     end
 
     def render(y)
-      attr_set A_NORMAL, 1, nil
+      attr_set A_NORMAL, @color, nil
       mvwaddstr stdscr, @pos.y + Form.os.y - y, @pos.x + Form.os.x, @msg
+    end
+
+    def set_color(col)
+      @color = col
     end
 
     def swap_tar(tar, cib)

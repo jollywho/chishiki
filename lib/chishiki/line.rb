@@ -42,7 +42,7 @@ module Chishiki
     end
 
     def draw
-      attr_set A_NORMAL, 3, nil
+      attr_set A_NORMAL, WHITE, nil
       Renderer.draw(@pos.x, @pos.y, @msg)
     end
   end

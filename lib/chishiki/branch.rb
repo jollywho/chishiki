@@ -11,9 +11,9 @@ module Chishiki
       @pos = pos
       @children = []
       @txt = Text.new(@pos.dup)
-      @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head], 4)
-      @marker = Label.new(@pos.dup.sh(MARKERWIDTH, 0), MARKER_F_N, 2)
-      @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), CHAR_WPIPE * PIPESIZE, 2)
+      @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head], YELLOW)
+      @marker = Label.new(@pos.dup.sh(MARKERWIDTH, 0), MARKER_F_N, GREEN)
+      @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), CHAR_WPIPE * PIPESIZE, GREEN)
       @cib = 0
       @height = 0
       @created = true
@@ -111,15 +111,33 @@ module Chishiki
       leaf ? self : @children[0]
     end
 
+    def set_focus_color
+      @pipe.set_color RED
+      @node.set_color RED
+      @wpipe.set_color RED
+    end
+
+    def unset_focus_color
+      @pipe.set_color YELLOW
+      @node.set_color YELLOW
+      @wpipe.set_color YELLOW
+    end
+
     def set_marker_edit
+      parent.children.each { |x| x.set_focus_color }
+      @wpipe.set_color CYAN
       @marker.set_msg MARKER_F_E
     end
 
     def set_marker_normal
+      parent.children.each { |x| x.set_focus_color }
+      @wpipe.set_color CYAN
       @marker.set_msg MARKER_F_N
     end
 
     def unset_marker
+      @wpipe.set_color YELLOW
+      parent.children.each { |x| x.unset_focus_color }
       @marker.set_msg MARKER_N_N
     end
 

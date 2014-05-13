@@ -10,6 +10,10 @@ module Chishiki
       @msg = msg
     end
 
+    def set_color(col)
+      @color = col
+    end
+
     def draw
       attr_set A_NORMAL, @color, nil
       Renderer.draw(@pos.x, @pos.y, @msg)
