@@ -33,6 +33,11 @@ module Chishiki
       @@focus.focus
     end
 
+    def do_modes
+      @mode.swap_modes
+      set_marker
+    end
+
     def set_marker
       if @mode.get_mode == :nav
         @@focus.set_marker_normal
