@@ -20,8 +20,11 @@ module Chishiki
     end
 
     def swallow(ch)
-      $log.debug "MODE #{mode}"
-      mode.call(ch).nil? ? ch : nil
+      if mode.call(ch).nil? and get_mode == :edit
+        ch
+      else
+          nil
+      end
     end
 
     def store(mode, ch, p)
