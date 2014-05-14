@@ -5,6 +5,7 @@ module Chishiki
       win = getmaxyx stdscr
       $window = Pos.new(0,0,win[1],win[0])
     end
+
     def draw(x,y,msg)
       right = (msg.size + x + Form.os.x) - $window.w
       left =  (x + Form.os.x)

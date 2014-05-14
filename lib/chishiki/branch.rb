@@ -4,7 +4,7 @@ module Chishiki
     @@seek
     def initialize(node, pos)
       $log.debug "=============new branch============"
-      @@seek = self unless !node.nil?
+      @@seek = self if node.nil?
       @parent = node
       @name = parent.name[0..-2] + ((parent.name[-1].to_i) + 1).to_s
       @pos = pos
@@ -154,8 +154,8 @@ module Chishiki
     end
 
     def handle_growth
-      inc_cib 1 unless !@txt.grow!
-      inc_cib -1 unless !@txt.shrink!
+      inc_cib 1 if @txt.grow!
+      inc_cib -1 if @txt.shrink!
     end
 
     def focus

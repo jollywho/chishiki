@@ -16,14 +16,19 @@ module Chishiki
     end
 
     def swap_modes
-      @cur = @cur == :nav ? :edit : :nav
+      @cur = 
+        if @cur == :nav
+          :edit
+        else
+          :nav
+        end
     end
 
     def swallow(ch)
-      if mode.call(ch).nil? && get_mode == :edit
+      if !mode.command(ch) && get_mode == :edit
         ch
       else
-          nil
+        nil
       end
     end
 
@@ -42,9 +47,10 @@ class Mode
   end
   def to_s
   end
-  def call(ch)
+  def command(ch)
     p = @procs[ch]
-    p.nil? ? nil : p.call
+    p.call unless p.nil?
+    p.nil? ? false : true
   end
 end
 

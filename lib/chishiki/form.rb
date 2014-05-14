@@ -3,7 +3,7 @@ module Chishiki
     def initialize
       Form.focus = nil
       @list = []
-      init
+      Form.init
       Form.os = Pos.new
       Form.nlo_dir = 0
       Form.nlo = 0
@@ -12,15 +12,6 @@ module Chishiki
       load_procs
       set_marker
       Form.shift
-    end
-
-    def init
-      Form.clear = Label.new(Pos.new(
-        0 ,0, $window.w, $window.h),
-        " " * $window.w * $window.h, 0)
-      $center = Pos.new(
-        $window.w / 2.0 - Text::TEXT_WIDTH / 4.0,
-        $window.h / 2.0 - Text::TEXT_HEIGHT / 2.0)
     end
 
     def update(ch)
