@@ -14,7 +14,12 @@ module Chishiki
 
     def render(y)
       attr_set A_NORMAL, @color, nil
-      mvwaddstr stdscr, @pos.y + Form.os.y - y, @pos.x + Form.os.x, @msg
+      mvwaddstr(
+        stdscr,
+        @pos.y + Form.os.y - y,
+        @pos.x + Form.os.x,
+        @msg
+      )
     end
 
     def set_color(col)
@@ -28,7 +33,7 @@ module Chishiki
 
     def move(y)
       @pos.y += y
-      if @pos.y >= Form.nlo and @target.pos.y < Form.nlo
+      if @pos.y >= Form.nlo && @target.pos.y < Form.nlo
         @amount += y
       end
     end

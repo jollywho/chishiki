@@ -80,31 +80,42 @@ module Chishiki
     end
 
     def pipe_tar
-      @parent.nil? ? self :
-        parent.leaf ? parent :
+      if @parent.nil?
+        self
+      elsif parent.leaf
+        parent
+      else
         parent.children.last
+      end
     end
 
     def up
-      @parent.nil? ? self :
-        parent.children.index(self) == 0 ? left :
-          parent[parent.children.index(self) - 1]
+      if @parent.nil?
+        self
+      elsif parent.children.index(self) == 0
+        left
+      else
+        parent[parent.children.index(self) - 1]
+      end
     end
 
     def down
-      $log.debug "DOWN"
       d = parent.children.index(self)
       d = parent[parent.children.index(self) + 1] unless d.nil?
-      !d.nil? ? d : !leaf ? right :  self
+      if !d.nil?
+        d
+      elsif !leaf
+        right
+      else
+        self
+      end
     end
 
     def left
-      $log.debug "LEFT"
       @parent.nil? ? self : parent
     end
 
     def right
-      $log.debug "RIGHT"
       leaf ? self : @children[0]
     end
 
