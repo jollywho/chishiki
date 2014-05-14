@@ -25,12 +25,44 @@ module Chishiki
       end
     end
 
+    def receive(str)
+      $log.debug "#######"
+      $log.debug str
+      @msg = str
+      @curs.x = @pos.x + @msg.size
+    end
+
+    def carry!
+      if @carry.nil?
+        nil
+      else
+        old = @carry.dup
+        @carry.clear
+        old
+      end
+    end
+
+    def curs_adjust
+      @curs.x = @pos.x + @msg.size
+    end
+
+    def newline
+      @msg += ' '
+      curs_adjust
+    end
+
     def add_ch(ch)
-      if @curs.x + 1 >= @pos.x + @pos.w
+      @msg += ch.chr.scan(/[[:print:]]/).join
+      if @curs.x + ch.size >= @pos.x + @pos.w
+        idx = @msg.rindex(' ')
+        if !idx.nil?
+          @carry = @msg[idx + 1..-1]
+          @msg = @msg[0..idx]
+        end
+        curs_adjust
         false
       else
-          @msg += ch.chr.scan(/[[:print:]]/).join
-          @curs.x = @pos.x + @msg.size
+        curs_adjust
         true
       end
     end

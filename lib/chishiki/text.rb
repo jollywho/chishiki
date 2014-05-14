@@ -15,10 +15,12 @@ module Chishiki
     end
 
     def new_line(y)
+      carry = @list[@index].carry! unless @index < 0
       @grow = true
       @index += 1
       @list.push Line.new(@pos.dup, @index)
       Form.bump_nlo @list[@index].pos.y, y
+      @list[@index].receive carry unless carry.nil?
     end
 
     def grow!
@@ -51,6 +53,11 @@ module Chishiki
       Form.bump_nlo @pos.y - 1, -@list.size - 1
     end
 
+    def insert_nl
+      @list[@index].newline
+      new_line(1)
+    end
+
     def curs
       @list[@index].curs
     end
@@ -60,7 +67,7 @@ module Chishiki
       if ch == 127 # delete
         del_line unless @list[@index].del
       elsif ch == 10 # newline
-        new_line(1) unless @list.size < @index
+        insert_nl unless @list.size < @index
       else # regular processing
         new_line(1) unless @list[@index].add_ch ch
       end
