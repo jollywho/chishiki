@@ -6,18 +6,17 @@ module Chishiki
       $log.debug "=============new branch============"
       @@seek = self unless !node.nil?
       @parent = node
-      $log.debug "\tits parent is #{parent.name}"
       @name = parent.name[0..-2] + ((parent.name[-1].to_i) + 1).to_s
       @pos = pos
       @children = []
       @txt = Text.new(@pos.dup)
-      @node = Label.new(@pos.dup.sh(NODESTART, 0), TYPES[:head], YELLOW)
-      @marker = Label.new(@pos.dup.sh(MARKERWIDTH, 0), MARKER_F_N, GREEN)
-      @wpipe = Label.new(@pos.dup.sh(PIPEWIDTH, 0), CHAR_WPIPE * PIPESIZE, GREEN)
+      @node = Label.new(@pos.dup.sh(NODE_START, 0), TYPES[:head], YELLOW)
+      @marker = Label.new(@pos.dup.sh(MARKER_WIDTH, 0), MARKER_F_N, GREEN)
+      @wpipe = Label.new(@pos.dup.sh(PIPE_WIDTH, 0), CHAR_WPIPE * PIPE_SIZE, GREEN)
       @cib = 0
       @height = 0
       @created = true
-      @pipe = Pipe.new(@pos.dup.sh(NODESTART, -1),
+      @pipe = Pipe.new(@pos.dup.sh(NODE_START, -1),
                        self.parent, pipe_tar)
       @widgets = []
       @widgets << @pipe << @marker << @node << @wpipe << @txt
@@ -40,7 +39,6 @@ module Chishiki
     end
 
     def inc_cib(x)
-      $log.debug "INC CIB #{x}"
       @cib += x
       @parent.inc_cib x unless @parent.nil?
     end
@@ -49,7 +47,6 @@ module Chishiki
       inc_cib 1
       px = @pos.dup.sh(2, @cib)
       br = Branch.new(self, px)
-      $log.debug "Added #{br.inspect}"
       @children.push br
       @height = 0
       br
@@ -66,7 +63,7 @@ module Chishiki
         u = up
         d = down
         ix= parent.children.index(self)
-        if ix != parent.children.size and ix != 0
+        if ix != parent.children.size && ix != 0
           d.swap_tar(u, @cib + u.cib + 1)
         else
           d.swap_tar(u, @cib + 2)
@@ -151,7 +148,8 @@ module Chishiki
     end
 
     def focus
-      move @txt.curs.y + Form.os.y, @txt.curs.x + Form.os.x
+      move @txt.curs.y + Form.os.y,
+        @txt.curs.x + Form.os.x
     end
 
     def seek(&c)
@@ -163,10 +161,8 @@ module Chishiki
 
     def render
       if @created
-        $log.debug "Didn't created #{@pos.y}"
         @created = false
-      elsif @pos.y >= Form.nlo and Form.nlo_dir != 0
-        $log.debug "DID Pos #{@pos.y} Form #{Form.nlo}"
+      elsif @pos.y >= Form.nlo && Form.nlo_dir != 0
         @pos.y += Form.nlo_dir
         @widgets.each { |x| x.move Form.nlo_dir }
       end

@@ -1,14 +1,16 @@
 module Chishiki
   class Text
+    TEXT_WIDTH = 40
+    TEXT_HEIGHT = 1
+
     attr_accessor :pos
+
     def initialize(pos)
       @pos = pos
       @list = []
-      @pos.w = 40
+      @pos.w = TEXT_WIDTH
       @pos.h = 1
       @index = -1
-      $log.debug "new Text"
-      $log.debug @pos
       new_line(2)
     end
 

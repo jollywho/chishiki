@@ -16,7 +16,7 @@ module Chishiki
 
     def draw
       attr_set A_NORMAL, @color, nil
-      Renderer.draw(@pos.x, @pos.y, @msg)
+      Screen.draw @pos.x, @pos.y, @msg
     end
 
     def move(y)

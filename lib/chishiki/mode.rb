@@ -20,7 +20,7 @@ module Chishiki
     end
 
     def swallow(ch)
-      if mode.call(ch).nil? and get_mode == :edit
+      if mode.call(ch).nil? && get_mode == :edit
         ch
       else
           nil

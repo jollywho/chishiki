@@ -2,7 +2,6 @@ module Chishiki
   class Line
     attr_accessor :curs, :pos, :line
     def initialize(pos, line)
-      $log.debug "new line"
       @pos = pos
       @line = line
       @msg = ""
@@ -17,19 +16,19 @@ module Chishiki
       else
         @msg.slice! @msg.size - 1
         @curs.x -= 1
-        mvwdelch stdscr, @curs.y + Form.os.y, @curs.x + Form.os.x
-        $log.debug @curs
-        $log.debug @msg
+        mvwdelch(
+          stdscr,
+          @curs.y + Form.os.y,
+          @curs.x + Form.os.x
+        )
         true
       end
     end
 
     def add_ch(ch)
-      $log.debug @pos
       if @curs.x + 1 >= @pos.x + @pos.w
         false
       else
-          $log.debug "line add #{ch}"
           @msg += ch.chr.scan(/[[:print:]]/).join
           @curs.x = @pos.x + @msg.size
         true
@@ -43,7 +42,7 @@ module Chishiki
 
     def draw
       attr_set A_NORMAL, WHITE, nil
-      Renderer.draw(@pos.x, @pos.y, @msg)
+      Screen.draw @pos.x, @pos.y, @msg
     end
   end
 end
