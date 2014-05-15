@@ -1,8 +1,15 @@
-# Chishiki
+chishiki - 知識
+=================
 
-TODO: Write a gem description
+http://jollywho.github.io/chishiki
 
-## Installation
+Author: Kevin Vollmer
+
+A command-line application for thinking and writing with branches.
+Written in Ruby and uses the {https://github.com/seanohalpin/ffi-ncurses ffi-ncurses} wrapper.
+
+Installation
+============
 
 Add this line to your application's Gemfile:
 
@@ -16,14 +23,9 @@ Or install it yourself as:
 
     $ gem install chishiki
 
-## Usage
+Issues
+======
 
-TODO: Write usage instructions here
+Please report any issues on the https://github.com/jollywho/chishiki/issues page.
 
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/chishiki/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Cursor flicker is a known issue with no fix in sight. If you know of a way to fix this, let the author know.
