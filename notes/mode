@@ -1,0 +1,15 @@
+##Nav##
+h-left
+j-down
+k-up
+l-right
+d-delete
+a-[mode->Edit]
+n-branch
+o-rival
+
+##Edit##
+esc-[mode->Nav]
+focus->handle_key
+
+hash of command's stored as CH => COMMAND

@@ -1,0 +1,6 @@
+# a line needs to carry words over to the next line when they reach the edge.
+
+split the line string by the last " " and carry the right resultant field to the next line.
+if there is no resultant, then nothing should be carried.
+
+the action should be triggered on the last index. whitespace can count as the last character.

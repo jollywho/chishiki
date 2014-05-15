@@ -8,10 +8,10 @@ date = "2014-05-06"
 Gem::Specification.new do |spec|
   spec.name          = "chishiki"
   spec.version       = Chishiki::VERSION
-  spec.authors       = ["jollywho"]
+  spec.authors       = ["Kevin Vollmer"]
   spec.email         = ["works.kvollmer@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = ["Chishiki is a writing app that structures ideas in branches."]
+  spec.description   = [""]
   spec.homepage      = ""
   spec.license       = "MIT"
 
