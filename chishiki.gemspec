@@ -10,10 +10,10 @@ Gem::Specification.new do |spec|
   spec.version       = Chishiki::VERSION
   spec.authors       = ["Kevin Vollmer"]
   spec.email         = ["works.kvollmer@gmail.com"]
-  spec.summary       = ["Chishiki is a writing app that structures ideas in branches."]
-  spec.description   = [""]
+  spec.summary       = ["Chishiki thinking with branches"]
+  spec.description   = ["Chishiki is a command-line application for thinking and writing with branches."]
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "WTFPL"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
