@@ -5,8 +5,7 @@ http://jollywho.github.io/chishiki
 
 Author: Kevin Vollmer
 
-A command-line application for thinking and writing with branches.
-Written in Ruby and uses the {https://github.com/seanohalpin/ffi-ncurses ffi-ncurses} wrapper.
+A command-line application for thinking and writing with branches. Written in Ruby and uses the https://github.com/seanohalpin/ffi-ncurses wrapper.
 
 Installation
 ============
