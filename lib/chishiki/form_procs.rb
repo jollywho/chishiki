@@ -12,6 +12,8 @@ module Chishiki
                                      do_modes }
       @mode.store :nav,  97,  proc { do_modes }
       @mode.store :edit, 27,  proc { do_modes }
+      @mode.store :nav,  83,  proc { save }
+      @mode.store :nav,  76,  proc { open }
     end
 
     class << self

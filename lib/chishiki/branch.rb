@@ -1,10 +1,12 @@
 module Chishiki
   class Branch
     attr_accessor :pos, :children, :parent, :cib, :name, :pipe
-    @@seek
+    class << self
+      attr_accessor :stem
+    end
     def initialize(node, pos)
       $log.debug "=============new branch============"
-      @@seek = self if node.nil?
+      Branch.stem = self if node.nil?
       @parent = node
       @name = parent.name[0..-2] + ((parent.name[-1].to_i) + 1).to_s
       @pos = pos
@@ -181,11 +183,8 @@ module Chishiki
     end
 
     def draw
-      @@seek.seek { |x| x.render }
+      Branch.stem.seek { |x| x.render }
     end
 
-    def inspect
-      "#{name} : #{@pos}"
-    end
   end
 end

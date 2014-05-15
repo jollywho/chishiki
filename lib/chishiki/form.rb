@@ -2,7 +2,6 @@ module Chishiki
   class Form
     def initialize
       Form.focus = nil
-      @list = []
       Form.init
       Form.os = Pos.new
       Form.nlo_dir = 0
@@ -18,6 +17,15 @@ module Chishiki
       Form.reset_nlo
       ch = @mode.swallow ch
       Form.focus.handle_key ch unless ch.nil?
+    end
+
+    def save
+      Seed::Transplant.new(Branch.stem).plant
+    end
+
+    def open
+      Branch.stem = Seed::Transplant.new(nil).replant
+      ch_focus Branch.stem
     end
 
     def draw
