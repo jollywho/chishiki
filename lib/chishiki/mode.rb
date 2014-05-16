@@ -3,7 +3,7 @@ module Chishiki
   class ModeHandler
     include Singleton
     def initialize
-      @modes = { :nav => Nav.new, :edit => Edit.new }
+      @modes = { :nav => Mode.new, :edit => Mode.new }
       @cur = :nav
     end
 
@@ -16,7 +16,7 @@ module Chishiki
     end
 
     def swap_modes
-      @cur = 
+      @cur =
         if @cur == :nav
           :edit
         else
@@ -51,17 +51,5 @@ class Mode
     p = @procs[ch]
     p.call unless p.nil?
     p.nil? ? false : true
-  end
-end
-
-class Nav < Mode
-  def to_s
-    "Nav"
-  end
-end
-
-class Edit < Mode
-  def to_s
-    "Edit"
   end
 end
