@@ -29,8 +29,13 @@ module Chishiki
     end
 
     def draw
+      Form.focus.update
       Form.focus.draw
       Form.focus.focus
+    end
+
+    def do_clear
+      Form.focus.clear
     end
 
     def do_modes

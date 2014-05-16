@@ -39,6 +39,15 @@ module Chishiki
       @list.size
     end
 
+    def clear
+      @list.size.times do
+        del_line
+        Form.focus.update
+        Form.reset_nlo
+      end
+      @list[@index].clear
+    end
+
     def del_line()
       if @list.size > 1
         @shrink = true

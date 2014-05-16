@@ -1,6 +1,6 @@
 module Chishiki
   class Branch
-    attr_accessor :pos, :children, :parent, :cib, :name, :pipe
+    attr_accessor :pos, :children, :parent, :cib, :name, :pipe, :widgets
     class << self
       attr_accessor :stem
     end
@@ -38,6 +38,10 @@ module Chishiki
 
     def [](index)
       @children[index]
+    end
+
+    def clear
+      @txt.clear
     end
 
     def inc_cib(x)
@@ -172,18 +176,25 @@ module Chishiki
       end
     end
 
-    def render
+    def update
+      Branch.stem.seek { |x| x.bump }
+    end
+
+    def bump
       if @created
         @created = false
       elsif @pos.y >= Form.nlo && Form.nlo_dir != 0
         @pos.y += Form.nlo_dir
         @widgets.each { |x| x.move Form.nlo_dir }
       end
-      @widgets.each { |x| x.draw }
     end
 
     def draw
-      Branch.stem.seek { |x| x.render }
+      Branch.stem.seek do |x|
+        x.widgets.each do |w|
+          w.draw
+        end
+      end
     end
 
   end

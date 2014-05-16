@@ -10,6 +10,10 @@ module Chishiki
       $log.debug @pos
     end
 
+    def clear
+
+    end
+
     def del
       if @curs.x <= @pos.x
         false
@@ -44,6 +48,11 @@ module Chishiki
 
     def curs_adjust
       @curs.x = @pos.x + @msg.size
+    end
+
+    def clear
+      @msg = ""
+      curs_adjust
     end
 
     def newline

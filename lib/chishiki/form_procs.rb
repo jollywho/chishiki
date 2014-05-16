@@ -12,6 +12,7 @@ module Chishiki
                                      do_modes }
       @mode.store :nav,  97,  proc { do_modes }
       @mode.store :edit, 27,  proc { do_modes }
+      @mode.store :edit, 21,  proc { do_clear }
       @mode.store :nav,  83,  proc { save }
       @mode.store :nav,  76,  proc { open }
     end
@@ -21,7 +22,7 @@ module Chishiki
 
     def init
       @clear = Label.new(Pos.new(
-        0 ,0, $window.w, $window.h),
+        0, 0, $window.w, $window.h),
         " " * $window.w * $window.h, 0)
       @center = Pos.new(
         $window.w / 2.0 - Text::TEXT_WIDTH / 4.0,
