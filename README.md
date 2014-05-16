@@ -1,5 +1,12 @@
 chishiki - 知識
 =================
+```
+     o          o      o
+     |    o     |    o | /  o
+ o-o O--o   o-o O--o   OO
+|    |  | |  \  |  | | | \  |
+ o-o o  o | o-o o  o | o  o |
+```
 
 http://jollywho.github.io/chishiki
 
