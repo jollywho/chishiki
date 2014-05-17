@@ -68,9 +68,11 @@ module Chishiki
       else
         u = up
         d = down
-        ix= parent.children.index(self)
-        if ix != parent.children.size && ix != 0
+        index = parent.children.index(self)
+        if index != parent.children.size && index != 0
           d.swap_tar(u, @cib + u.cib + 1)
+        elsif index != parent.children.size
+          d.swap_tar(u, u.cib - 2)
         else
           d.swap_tar(u, @cib + 2)
         end
