@@ -10,7 +10,6 @@ module Chishiki
       @mode = ModeHandler.instance
       load_procs
       set_marker
-      Form.shift
     end
 
     def update(ch)
@@ -20,12 +19,17 @@ module Chishiki
     end
 
     def save
-      Seed::Transplant.new(Branch.stem).plant
+      Seed.plant Branch.stem, Form.focus
     end
 
-    def open
-      Branch.stem = Seed::Transplant.new(nil).replant
-      ch_focus Branch.stem
+    def load_file
+      s = Seed.cultivate
+      if !s
+        Branch.stem = Form.focus
+        ch_focus Branch.stem
+      else
+        ch_focus Form.focus
+      end
     end
 
     def draw

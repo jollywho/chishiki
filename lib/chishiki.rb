@@ -28,6 +28,7 @@ module Chishiki
 
     Screen.init
     form = Form.new
+    form.load_file
     form.draw
     while ch != KEY_CTRL_Q
       ch = wgetch stdscr

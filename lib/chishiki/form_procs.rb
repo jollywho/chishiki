@@ -14,7 +14,7 @@ module Chishiki
       @mode.store :edit, 27,  proc { do_modes }
       @mode.store :edit, 21,  proc { do_clear }
       @mode.store :nav,  83,  proc { save }
-      @mode.store :nav,  76,  proc { open }
+      @mode.store :nav,  76,  proc { load_file }
     end
 
     class << self
