@@ -2,7 +2,7 @@ module Chishiki
   class Branch
     attr_accessor :pos, :children, :parent, :cib, :name, :pipe, :widgets
     class << self
-      attr_accessor :stem
+      attr_accessor :stem, :status
     end
     def initialize(node, pos)
       $log.debug "=============new branch============"
@@ -162,6 +162,12 @@ module Chishiki
     def handle_growth
       inc_cib 1 if @txt.grow!
       inc_cib -1 if @txt.shrink!
+    end
+
+    def show_status(msg)
+      @status = Status.new msg
+      @status.draw
+      @status = nil
     end
 
     def focus

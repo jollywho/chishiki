@@ -24,7 +24,14 @@ module Chishiki
         @file.close
         @file = File.open(ARGV[0], 'w')
         @file.puts YAML.dump(data)
+        @planted = true
+      end
+
+      def bury
         @file.close
+        unless @planted
+          File.delete(ARGV[0])
+        end
       end
 
       def replant
@@ -33,6 +40,7 @@ module Chishiki
         focus = data[:focus]
         Branch.stem = branch
         Form.focus = focus
+        @planted = true
       end
     end
   end

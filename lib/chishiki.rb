@@ -47,6 +47,7 @@ module Chishiki
     end
   rescue => err
   ensure
+    Seed.bury
     endwin
     $log.debug err
   end

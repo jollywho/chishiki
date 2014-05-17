@@ -20,6 +20,7 @@ module Chishiki
 
     def save
       Seed.plant Branch.stem, Form.focus
+      Form.focus.show_status ARGV[0]
     end
 
     def load_file
