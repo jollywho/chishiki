@@ -6,7 +6,8 @@ include FFI::NCurses
 
 module Chishiki
 
-  Dir["../lib/chishiki/*.rb"].each {|file| require file}
+  home = File.expand_path('../lib/chishiki', File.dirname(__FILE__))
+  Dir["#{home}/*.rb"].each {|file| require file}
 
   begin
     initscr

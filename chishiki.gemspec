@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["works.kvollmer@gmail.com"]
   spec.summary       = ["Chishiki thinking with branches"]
   spec.description   = ["Chishiki is a command-line application for thinking and writing with branches."]
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/jollywho/chishiki"
   spec.license       = "WTFPL"
 
   spec.files         = `git ls-files -z`.split("\x0")
