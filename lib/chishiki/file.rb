@@ -29,7 +29,7 @@ module Chishiki
         @planted = true
       end
 
-      def bury
+      def discard
         @file.close unless @file.nil?
         if !@planted && !@found
           File.delete(ARGV[0]) unless ARGV[0].nil?

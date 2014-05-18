@@ -5,7 +5,6 @@ module Chishiki
       attr_accessor :stem, :status
     end
     def initialize(node, pos)
-      $log.debug "=============new branch============"
       Branch.stem = self if node.nil?
       @parent = node
       @name = parent.name[0..-2] + ((parent.name[-1].to_i) + 1).to_s
@@ -74,12 +73,10 @@ module Chishiki
         d = down
         index = parent.children.index(self)
         if index != parent.children.size && index != 0
-          $log.debug "index"
           d.swap_tar(u, @cib + u.cib + 1)
         elsif index != parent.children.size
           d.swap_tar(u, u.height + @cib + 1)
         else
-          $log.debug "not index"
           d.swap_tar(u, @cib + 2)
         end
         @parent.children.delete(self)

@@ -2,13 +2,11 @@
 #
 #
 require 'ffi-ncurses'
-require 'logger'
 include FFI::NCurses
 
 module Chishiki
 
-  Dir["./chishiki/*.rb"].each {|file| require file}
-  $log = Logger.new("log")
+  Dir["../lib/chishiki/*.rb"].each {|file| require file}
 
   begin
     initscr
@@ -46,7 +44,8 @@ module Chishiki
   rescue => err
   ensure
     endwin
-    Seed.bury
+    Seed.discard
+    puts err
     abort
   end
 end

@@ -72,7 +72,6 @@ module Chishiki
     end
 
     def handle_key(ch)
-      $log.debug "text update"
       if ch == 127 # delete
         del_line unless @list[@index].del
       elsif ch == 10 # newline
