@@ -1,0 +1,7 @@
+running the script "chishiki [file]" in normal use will mean running from a non-local context.
+therefore __FILE__ will be incorrect if it is stored and run globally as an alias.
+
+things to figure out:
+-where are the files stored after deploying?
+-how to make an alias part of install script/ bundle
+-how to detect the PWD when the script is called globally

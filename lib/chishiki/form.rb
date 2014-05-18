@@ -41,6 +41,7 @@ module Chishiki
 
     def do_clear
       Form.focus.clear
+      Form.shift
     end
 
     def do_modes
