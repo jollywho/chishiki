@@ -7,7 +7,6 @@ module Chishiki
       @msg = ""
       @pos.y += @line
       @curs = Pos.new(@pos.x, @pos.y, 1, 1)
-      $log.debug @pos
     end
 
     def clear
@@ -30,8 +29,6 @@ module Chishiki
     end
 
     def receive(str)
-      $log.debug "#######"
-      $log.debug str
       @msg = str
       @curs.x = @pos.x + @msg.size
     end

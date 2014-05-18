@@ -9,7 +9,6 @@ module Chishiki
 
   Dir["./chishiki/*.rb"].each {|file| require file}
   $log = Logger.new("log")
-  $log.debug "***************"
 
   begin
     initscr
@@ -32,7 +31,6 @@ module Chishiki
     form.draw
     while ch != KEY_CTRL_Q
       ch = wgetch stdscr
-      $log.debug ch
       if ch == KEY_RESIZE
         ch = nil
         endwin
@@ -47,8 +45,8 @@ module Chishiki
     end
   rescue => err
   ensure
-    Seed.bury
     endwin
-    $log.debug err
+    Seed.bury
+    abort
   end
 end

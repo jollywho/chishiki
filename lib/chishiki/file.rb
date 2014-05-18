@@ -4,12 +4,14 @@ module Chishiki
     class << self
       def cultivate()
         begin
-          found = File.file? ARGV[0]
+          @found = File.file? ARGV[0]
           @file = File.open(ARGV[0], 'a+')
-          if found
+          if @found
             replant
-          else
+          elsif @file
             false
+          else
+            raise "err"
           end
         rescue
           endwin
@@ -28,9 +30,9 @@ module Chishiki
       end
 
       def bury
-        @file.close
-        unless @planted
-          File.delete(ARGV[0])
+        @file.close unless @file.nil?
+        if !@planted && !@found
+          File.delete(ARGV[0]) unless ARGV[0].nil?
         end
       end
 
