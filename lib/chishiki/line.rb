@@ -9,10 +9,6 @@ module Chishiki
       @curs = Pos.new(@pos.x, @pos.y, 1, 1)
     end
 
-    def clear
-
-    end
-
     def del
       if @curs.x <= @pos.x
         false
