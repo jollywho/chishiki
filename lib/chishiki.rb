@@ -35,7 +35,7 @@ module Chishiki
         ch = nil
         endwin
         Screen.init
-        form.init
+        Form.init
         Form.shift
       end
       form.update ch
