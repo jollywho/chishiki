@@ -144,13 +144,13 @@ module Chishiki
 
     def set_marker_edit
       parent.children.each { |x| x.set_focus_color }
-      @wpipe.set_color CYAN
+      @wpipe.set_color BLUE
       @marker.set_msg MARKER_F_E
     end
 
     def set_marker_normal
       parent.children.each { |x| x.set_focus_color }
-      @wpipe.set_color CYAN
+      @wpipe.set_color BLUE
       @marker.set_msg MARKER_F_N
     end
 

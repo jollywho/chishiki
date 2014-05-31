@@ -19,7 +19,7 @@ module Chishiki
     init_pair(WHITE,   Color::WHITE,   -1)
     init_pair(MAGENTA, Color::MAGENTA, -1)
     init_pair(BLUE,    Color::BLUE,    -1)
-    init_pair(CYAN,    Color::CYAN,    -1)
+    init_pair(CYAN,    Color::CYAN,     0) # for status)
     init_pair(YELLOW,  Color::YELLOW,  -1)
     noecho
     curs_set 2

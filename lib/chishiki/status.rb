@@ -7,6 +7,7 @@ module Chishiki
     end
 
     def draw
+      attr_set A_BOLD, CYAN, nil
       mvwaddstr stdscr, @pos.y, @pos.x, @msg
     end
 
