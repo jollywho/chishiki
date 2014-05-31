@@ -6,12 +6,13 @@ module Chishiki
     end
     def initialize(node, pos)
       Branch.stem = self if node.nil?
+      init_color = node.nil? ? YELLOW : MAGENTA
       @parent = node
       @name = parent.name[0..-2] + ((parent.name[-1].to_i) + 1).to_s
       @pos = pos
       @children = []
       @txt = Text.new(@pos.dup)
-      @node = Label.new(@pos.dup.sh(NODE_START, 0), TYPES[:head], MAGENTA)
+      @node = Label.new(@pos.dup.sh(NODE_START, 0), TYPES[:head], init_color)
       @marker = Label.new(@pos.dup.sh(MARKER_WIDTH, 0), MARKER_F_N, GREEN)
       @wpipe = Label.new(@pos.dup.sh(PIPE_WIDTH, 0), CHAR_WPIPE * PIPE_SIZE, GREEN)
       @cib = 0
