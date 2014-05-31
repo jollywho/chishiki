@@ -1,14 +1,14 @@
 module Chishiki
   class Form
     def load_procs
-      @mode.store :nav,  91, proc { ch_focus Form.focus.up }
-      @mode.store :nav,  93, proc { ch_focus Form.focus.down }
-      @mode.store :nav,  123, proc { ch_focus Form.focus.left }
-      @mode.store :nav,  125, proc { ch_focus Form.focus.right }
-      @mode.store :nav,  28, proc { ch_focus Form.focus.add_leaf
+      @mode.store :nav,  123, proc { ch_focus Form.focus.up }
+      @mode.store :nav,  125, proc { ch_focus Form.focus.down }
+      @mode.store :nav,  91, proc { ch_focus Form.focus.left }
+      @mode.store :nav,  93, proc { ch_focus Form.focus.right }
+      @mode.store :nav,  124, proc { ch_focus Form.focus.add_leaf
                                      do_modes }
       @mode.store :nav,  68, proc { ch_focus Form.focus.delete_branch }
-      @mode.store :nav,  16, proc { ch_focus Form.focus.add_branch
+      @mode.store :nav,  43, proc { ch_focus Form.focus.add_branch
                                      do_modes }
       @mode.store :nav,  29,  proc { do_modes }
       @mode.store :edit, 27,  proc { do_modes }
