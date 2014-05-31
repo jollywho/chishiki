@@ -54,7 +54,7 @@ module Chishiki
     end
 
     def add_ch(ch)
-      @msg += ch.chr.scan(/[[:print:]]/).join
+      @msg += ch.chr
       if @curs.x + ch.size >= @pos.x + @pos.w
         idx = @msg.rindex(' ')
         if !idx.nil?

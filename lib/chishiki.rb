@@ -13,13 +13,14 @@ module Chishiki
     initscr
     raw
     start_color
-    init_pair(RED,     Color::RED,     Color::BLACK)
-    init_pair(GREEN,   Color::GREEN,   Color::BLACK)
-    init_pair(WHITE,   Color::WHITE,   Color::BLACK)
-    init_pair(MAGENTA, Color::MAGENTA, Color::BLACK)
-    init_pair(BLUE,    Color::BLUE,    Color::BLACK)
-    init_pair(CYAN,    Color::CYAN,    Color::BLACK)
-    init_pair(YELLOW,  Color::YELLOW,  Color::BLACK)
+    use_default_colors
+    init_pair(RED,     Color::RED,     -1)
+    init_pair(GREEN,   Color::GREEN,   -1)
+    init_pair(WHITE,   Color::WHITE,   -1)
+    init_pair(MAGENTA, Color::MAGENTA, -1)
+    init_pair(BLUE,    Color::BLUE,    -1)
+    init_pair(CYAN,    Color::CYAN,    -1)
+    init_pair(YELLOW,  Color::YELLOW,  -1)
     noecho
     curs_set 2
     ch = 0

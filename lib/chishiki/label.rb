@@ -24,6 +24,7 @@ module Chishiki
     end
 
     def draw_abs
+      attr_set A_NORMAL, 0, nil
       mvwaddstr stdscr, @pos.y, @pos.x, @msg
     end
   end
