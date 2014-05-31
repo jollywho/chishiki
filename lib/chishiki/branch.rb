@@ -54,7 +54,7 @@ module Chishiki
 
     def add_branch
       inc_cib 1
-      px = @pos.dup.sh(2, @cib)
+      px = @pos.dup.sh(3, @cib)
       br = Branch.new(self, px)
       @children.push br
       @height = 0

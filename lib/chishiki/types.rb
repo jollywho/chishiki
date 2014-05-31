@@ -1,6 +1,6 @@
 module Chishiki
   TYPES = {
-    :head => "￭─o",
+    :head => "￭──o",
     :body => "├─o",
     :tail => "└─o",
   }
@@ -12,7 +12,7 @@ module Chishiki
   MARKER_N_N = ' '
   PIPE_WIDTH = -18
   MARKER_WIDTH = -1
-  NODE_WIDTH = -3
+  NODE_WIDTH = -4
   PIPE_SIZE = 17
   NODE_START = PIPE_WIDTH + NODE_WIDTH
 end
