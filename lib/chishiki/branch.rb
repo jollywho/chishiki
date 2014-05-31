@@ -11,7 +11,7 @@ module Chishiki
       @pos = pos
       @children = []
       @txt = Text.new(@pos.dup)
-      @node = Label.new(@pos.dup.sh(NODE_START, 0), TYPES[:head], YELLOW)
+      @node = Label.new(@pos.dup.sh(NODE_START, 0), TYPES[:head], MAGENTA)
       @marker = Label.new(@pos.dup.sh(MARKER_WIDTH, 0), MARKER_F_N, GREEN)
       @wpipe = Label.new(@pos.dup.sh(PIPE_WIDTH, 0), CHAR_WPIPE * PIPE_SIZE, GREEN)
       @cib = 0
@@ -137,9 +137,9 @@ module Chishiki
     end
 
     def unset_focus_color
-      @pipe.set_color YELLOW
-      @node.set_color YELLOW
-      @wpipe.set_color YELLOW
+      @pipe.set_color MAGENTA
+      @node.set_color MAGENTA
+      @wpipe.set_color MAGENTA
     end
 
     def set_marker_edit
@@ -155,7 +155,7 @@ module Chishiki
     end
 
     def unset_marker
-      @wpipe.set_color YELLOW
+      @wpipe.set_color MAGENTA
       parent.children.each { |x| x.unset_focus_color }
       @marker.set_msg MARKER_N_N
     end
