@@ -1,3 +1,11 @@
+class String
+  def indices e
+    start, result = -1, []
+    result << start while start = (self.index e, start + 1)
+    result
+  end
+end
+
 module Chishiki
   class Line
     attr_accessor :curs, :pos, :line
@@ -22,6 +30,14 @@ module Chishiki
         )
         true
       end
+    end
+
+    def del_word
+      #there will always be at least 1 word or punc
+      #on the current line.
+      #ergo i don't have to bother with line returns
+      n = @msg.size - @msg.indices(/[,.; ]/).last
+      (0..n-1).each { |i| del }
     end
 
     def receive(str)
