@@ -77,7 +77,7 @@ module Chishiki
       elsif ch == 10 # newline
         insert_nl unless @list.size < @index
       elsif ch == 23 # ^W
-        @list[@index].del_word
+        del_line unless @list[@index].del_word
       else # regular processing
         new_line(1) unless @list[@index].add_ch ch
       end
