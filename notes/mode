@@ -12,4 +12,19 @@ o-rival
 esc-[mode->Nav]
 focus->handle_key
 
+C-w delete previous word
+C-u clear text
+/ search
+n next search result
+N previous search result
+
 hash of command's stored as CH => COMMAND
+
+##Delete Prev Word##
+from current index, chomp chars backwards until reaching a punctuation character or a space
+if multiple punctuation are in a sequence between a space they should all be cleared in one keystroke.
+delete backwards until a change in punctuation or word
+
+##Undo History##
+
+##Search##
