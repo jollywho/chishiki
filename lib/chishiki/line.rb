@@ -34,19 +34,13 @@ module Chishiki
 
     def del_word
       n = @msg.indices(/\s/).last
-      n = @msg.size if n.nil?
       if n.nil?
         n = @msg.size
       else
         n = @msg.size - n
       end
-
-      if n == 0
-        false
-      else
-        (0..n-1).each { |i| del }
-        true
-      end
+      (0..n-1).each { |i| del }
+      n == 0 ? false : true
     end
 
     def receive(str)
