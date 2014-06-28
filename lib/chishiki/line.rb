@@ -33,10 +33,12 @@ module Chishiki
     end
 
     def del_word
-      #there will always be at least 1 word or punc
-      #on the current line.
-      #ergo i don't have to bother with line returns
-      n = @msg.size - @msg.indices(/[,.; ]/).last
+      n = @msg.indices(/\s/).last
+      if n.nil?
+        n = @msg.size
+      else
+        n = @msg.size - n
+      end
       (0..n-1).each { |i| del }
     end
 
