@@ -3,11 +3,23 @@
 #
 require 'ffi-ncurses'
 include FFI::NCurses
+require 'chishiki/branch.rb'
+require 'chishiki/file.rb'
+require 'chishiki/form_procs.rb'
+require 'chishiki/form.rb'
+require 'chishiki/label.rb'
+require 'chishiki/line.rb'
+require 'chishiki/mode.rb'
+require 'chishiki/nil_branch.rb'
+require 'chishiki/pipe.rb'
+require 'chishiki/pos.rb'
+require 'chishiki/screen.rb'
+require 'chishiki/status.rb'
+require 'chishiki/text.rb'
+require 'chishiki/types.rb'
+require 'chishiki/version.rb'
 
 module Chishiki
-
-  home = File.expand_path('../lib/chishiki', File.dirname(__FILE__))
-  Dir["#{home}/*.rb"].each {|file| require file}
 
   begin
     initscr
