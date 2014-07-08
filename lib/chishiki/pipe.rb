@@ -2,7 +2,7 @@ module Chishiki
   class Pipe
     attr_accessor :pos, :amount
     def initialize(pos, par, tar)
-      @msg = "|"
+      @msg = "║"
       @pos = pos
       @parent = par
       @target = tar
