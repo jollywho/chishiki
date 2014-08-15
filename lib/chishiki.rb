@@ -51,8 +51,8 @@ module Chishiki
         Form.shift
       end
       refresh
-      form.update ch
       clear
+      form.update ch
       form.draw
       doupdate
       wrefresh stdscr
