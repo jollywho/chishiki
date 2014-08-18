@@ -37,6 +37,7 @@ module Chishiki
     curs_set 2
     ch = 0
 
+    $0 = "chi:" + ARGV[0].to_s
     Screen.init
     form = Form.new
     form.load_file
