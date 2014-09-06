@@ -1,12 +1,11 @@
 module Chishiki
   TYPES = {
-    :head => "￭═o",
-    :body => "║═o",
-    :tail => "╚═o",
+    :head => "￭─o",
+    :body => "│─o",
+    :tail => "└─o",
   }
-  CHAR_WPIPE = '═'
-  CHAR_WPIPE_F = '~'
-  CHAR_VPIPE = '║'
+  CHAR_WPIPE = TYPES[:body][1]
+  CHAR_VPIPE = TYPES[:body][0]
   MARKER_F_E = '❯'
   MARKER_F_N = '/'
   MARKER_N_N = ' '
