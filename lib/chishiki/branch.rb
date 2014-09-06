@@ -9,7 +9,7 @@ module Chishiki
       init_color = node.nil? ? YELLOW : MAGENTA
       @parent = node
       @name = parent.name[0..-2] + ((parent.name[-1].to_i) + 1).to_s
-      @pos = pos
+      @pos = pos.dup.sh(-1, 0)
       @children = []
       @txt = Text.new(@pos.dup)
       @node = Label.new(@pos.dup.sh(NODE_START, 0), TYPES[:head], init_color)
