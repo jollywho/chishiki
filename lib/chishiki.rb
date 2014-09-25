@@ -42,7 +42,7 @@ module Chishiki
     form = Form.new
     form.load_file
     form.draw
-    while ch != KEY_CTRL_Q
+    while ch != KEY_CTRL_D
       ch = wgetch stdscr
       if ch == KEY_RESIZE
         ch = nil
