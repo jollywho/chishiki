@@ -1,19 +1,13 @@
 Chishiki - 知識
 =================
-```
-     o          o      o
-     |    o     |    o | /  o
- o-o O--o   o-o O--o   OO
-|    |  | |  \  |  | | | \  |
- o-o o  o | o-o o  o | o  o |
-```
-
 A command-line program to write and track notes using branches.
+
+![Screenshot](https://raw.github.com/jollywho/chishiki/master/screenshot.png)
 
 Requires
 ==
-* ruby
-* ffi-ncurses https://github.com/seanohalpin/ffi-ncurses
+* `ruby`
+* `ffi-ncurses` https://github.com/seanohalpin/ffi-ncurses
 
 Usage
 ==
@@ -23,11 +17,12 @@ chi [filename]
 
 Keys
 ==
+General
 * `o`      new child branch
 * `O`      new sibling branch (same parent)
 * `D`      delete branch
 * `S`      save file
-* `C-d`    quit
+* `c-d`    quit
 * `a`      enter edit mode
 * `escape` exit edit mode (normal mode)
 
@@ -38,7 +33,7 @@ Movement (normal mode)
 * `l`      to sibling (uses j if no sibling)
 
 Edit Mode
-* `C-w`    kill-word backwards
+* `c-w`    kill-word backwards
 
 Issues
 ======
