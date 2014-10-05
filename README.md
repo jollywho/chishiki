@@ -1,4 +1,4 @@
-chishiki - 知識
+Chishiki - 知識
 =================
 ```
      o          o      o
@@ -8,26 +8,35 @@ chishiki - 知識
  o-o o  o | o-o o  o | o  o |
 ```
 
-http://jollywho.github.io/chishiki
+A command-line program to write and track notes using branches.
 
-Author: Kevin Vollmer
+Requires
+==
+ruby
+ffi-ncurses https://github.com/seanohalpin/ffi-ncurses
 
-A command-line application for thinking and writing with branches. Written in Ruby and uses the https://github.com/seanohalpin/ffi-ncurses wrapper.
+Usage
+==
+chi <filename>
 
-Installation
-============
+Keys
+==
+o - new child branch
+O - new sibling branch (same parent)
+D - delete branch
+S - save file
+C-d - quit
+a - enter edit mode
+escape - exit edit mode (normal mode)
 
-Add this line to your application's Gemfile:
+Movement (normal mode)
+h - to parent (uses k if no parent)
+j - next branch down
+k - next branch up
+l - to sibling (uses j if no sibling)
 
-    gem 'chishiki'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install chishiki
+Edit Mode
+C-W  kill-word backwards
 
 Issues
 ======
