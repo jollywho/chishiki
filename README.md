@@ -12,8 +12,8 @@ A command-line program to write and track notes using branches.
 
 Requires
 ==
-ruby
-ffi-ncurses https://github.com/seanohalpin/ffi-ncurses
+* ruby
+* ffi-ncurses https://github.com/seanohalpin/ffi-ncurses
 
 Usage
 ==
@@ -23,22 +23,22 @@ chi [filename]
 
 Keys
 ==
-*`o`      new child branch
-*`O`      new sibling branch (same parent)
-*`D`      delete branch
-*`S`      save file
-*`C-d`    quit
-*`a`      enter edit mode
-*`escape` exit edit mode (normal mode)
+* `o`      new child branch
+* `O`      new sibling branch (same parent)
+* `D`      delete branch
+* `S`      save file
+* `C-d`    quit
+* `a`      enter edit mode
+* `escape` exit edit mode (normal mode)
 
 Movement (normal mode)
-*`h`      to parent (uses k if no parent)
-*`j`      next branch down
-*`k`      next branch up
-*`l`      to sibling (uses j if no sibling)
+* `h`      to parent (uses k if no parent)
+* `j`      next branch down
+* `k`      next branch up
+* `l`      to sibling (uses j if no sibling)
 
 Edit Mode
-*`C-w`    kill-word backwards
+* `C-w`    kill-word backwards
 
 Issues
 ======
